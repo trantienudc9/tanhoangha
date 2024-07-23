@@ -37,6 +37,10 @@ class SuppliesService extends BaseService
             $request['URL'] = '/uploads/' . $fileName; // Lưu URL của ảnh vào cơ sở dữ liệu
         }
 
+        if(!$request->kind_product_type){
+            $request['kind_product_type'] = null;
+        }
+
         $this->repository->update($request->id_product,$request->toArray());
     }
 

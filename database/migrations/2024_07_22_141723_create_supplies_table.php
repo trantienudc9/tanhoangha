@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->comment("tên vật liệu");
             $table->string('type')->comment("hãng");
             $table->integer('product_type')->comment("Loại sản phẩm");
+            $table->integer('kind_product_type')->nullable()->comment("Loại sản phẩm theo nhóm sản phẩm");
             $table->integer('status')->comment("1: là sản phẩm bình thường; 2: sản phẩm nổi bật ưa chuộng; 3: sản phẩm mới");
             $table->string('URL');
             $table->timestamps();
