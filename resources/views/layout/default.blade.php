@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +15,7 @@
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
     @vite('resources/css/app.css')
 </head>
+
 <body class="bg-slate-100">
     {{-- <h1 class="text-3xl font-bold underline">
         Hello world!
@@ -42,26 +44,77 @@
                 <!-- Search bar -->
                 <div class="flex items-center space-x-4 relative">
                     <div class="relative">
-                        <input type="text" placeholder="Tìm kiếm..." class="py-1 px-3 bg-white text-white border border-teal-400 rounded-md focus:outline-none focus:border-teal-600">
+                        <input type="text" placeholder="Tìm kiếm..."
+                            class="py-1 px-3 bg-white text-white border border-teal-400 rounded-md focus:outline-none focus:border-teal-600">
                         <button class="absolute right-0 top-0 mt-1 mr-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-teal-400" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M15.293 13.707a1 1 0 0 1-1.414 1.414l-3.717-3.717a5.5 5.5 0 1 1 1.414-1.414l3.717 3.717zm-.707.707a7.5 7.5 0 1 0-10.606-10.606 7.5 7.5 0 0 0 10.606 10.606z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-teal-400" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M15.293 13.707a1 1 0 0 1-1.414 1.414l-3.717-3.717a5.5 5.5 0 1 1 1.414-1.414l3.717 3.717zm-.707.707a7.5 7.5 0 1 0-10.606-10.606 7.5 7.5 0 0 0 10.606 10.606z"
+                                    clip-rule="evenodd" />
                             </svg>
                         </button>
                     </div>
 
                     <!-- Auth buttons -->
                     <div>
-                        <a href="#" class="py-2 px-4 bg-teal-700 text-white rounded-md hover:bg-teal-600">Đăng nhập</a>
-                        <a href="#" class="py-2 px-4 bg-teal-800 text-white rounded-md hover:bg-teal-900">Đăng ký</a>
+                        <a href="#" class="py-2 px-4 bg-teal-700 text-white rounded-md hover:bg-teal-600">Đăng
+                            nhập</a>
+                        <a href="#" class="py-2 px-4 bg-teal-800 text-white rounded-md hover:bg-teal-900">Đăng
+                            ký</a>
                     </div>
                 </div>
             </div>
         </nav>
-          <main class="py-4">
+        <main class="py-4">
 
             @yield('content')
         </main>
+        <footer class="bg-teal-500 text-gray-100">
+            <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Column 1: Logo and Contact Info -->
+                    <div class="col-span-1 md:col-span-1">
+                        <h3 class="text-lg font-semibold mb-4">Liên hệ</h3>
+                        <p class="mb-2"><i class="fa-solid fa-map-marker-alt mr-2 text-blue-500"></i>123 Đường ABC,
+                            Quận XYZ, TP. HCM</p>
+                        <p class="mb-2"><i class="fa-solid fa-phone-alt mr-2 text-blue-500"></i><a
+                                href="tel:+123456789">(+84) 123 456 789</a></p>
+                        <p class="mb-2"><i class="fa-solid fa-envelope mr-2 text-blue-500"></i><a
+                                href="mailto:info@example.com">info@example.com</a></p>
+                    </div>
+                    <!-- Column 2: Quick Links -->
+                    <div class="col-span-1 md:col-span-1">
+                        <h3 class="text-lg font-semibold mb-4">Liên kết nhanh</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-500">Giới thiệu</a></li>
+                            <li><a href="#" class="hover:text-blue-500">Sản phẩm</a></li>
+                            <li><a href="#" class="hover:text-blue-500">Dịch vụ</a></li>
+                            <li><a href="#" class="hover:text-blue-500">Bài viết</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 3: Social Links -->
+                    <div class="col-span-1 md:col-span-1">
+                        <h3 class="text-lg font-semibold mb-4">Mạng xã hội</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-blue-500 hover:text-blue-600"><i
+                                    class="fa-brands fa-facebook"></i></a>
+                            <a href="#" class="text-blue-500 hover:text-blue-600"><i
+                                    class="fa-brands fa-twitter"></i></a>
+                            <a href="#" class="text-blue-500 hover:text-blue-600"><i
+                                    class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="text-blue-500 hover:text-blue-600"><i
+                                    class="fa-brands fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Copyright -->
+                <div class="mt-8 border-t border-gray-700 pt-4 text-center text-sm">
+                    <p>&copy; 2024 Tên Công ty. Tất cả các quyền được bảo lưu.</p>
+                </div>
+            </div>
+        </footer>
+
 
         {{-- <script src="{{ asset('library/bootstrap-5.3.3-dist/js/bootstrap.min.js') }}"></script> --}}
         <script src="{{ asset('library/fontawesome-free-6.6.0-web/js/all.min.js') }}"></script>
@@ -69,4 +122,5 @@
         @yield('script')
     </div>
 </body>
+
 </html>

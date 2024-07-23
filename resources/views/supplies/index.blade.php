@@ -84,8 +84,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex justify-end mb-4 mr-4">
-                                                    <i
-                                                        class="fa-solid fa-ellipsis text-xl transition transform hover:scale-110"></i>
+                                                    <a href="{{ route('product.detail', ['id' => $itemSupplies->id]) }}"
+                                                        title="chi tiết">
+                                                        <i
+                                                            class="fa-solid fa-ellipsis text-xl transition transform hover:scale-110"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         @endforeach
