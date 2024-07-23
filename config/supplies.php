@@ -10,11 +10,6 @@ return [
         2 => 'Sản phẩm nổi bật ưa chuộng',
         3 => 'Sản phẩm mới',
     ],
-    'status' => [
-        1 => 'Sản phẩm bình thường',
-        2 => 'Sản phẩm nổi bật ưa chuộng',
-        3 => 'Sản phẩm mới',
-    ],
     'metal' => [
         1 => 'Bulong inox',
         2 => 'Đá cắt đá mài',

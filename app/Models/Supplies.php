@@ -12,6 +12,7 @@ class Supplies extends Model
         'name',
         'type',
         'product_type',
+        'kind_product_type',
         'status',
         'URL'
     ];
