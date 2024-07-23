@@ -19,24 +19,26 @@
                         @foreach ($supplies as $itemSupplies)
                             <div
                                 class="group rounded-lg hover:shadow-xl  from-purple-400 via-pink-500 to-red-500 transform hover:scale-105 transition duration-300 ease-in-out">
-                                <div class=" h-96">
-                                    <img src="{{ asset($itemSupplies->URL) }}" alt="{{ $itemSupplies->name }}"
-                                        class="w-full h-2/3 object-cover">
-                                    <div class="mt-6 px-8">
-                                        <h2 class="text-lg font-semibold text-gray-800">{{ $itemSupplies->name }}</h2>
-                                        <!-- Nếu cần thêm thông tin khác, bạn có thể thêm vào đây -->
+                                <a href="{{ route('product.detail',['id' => $itemSupplies->id]) }}">
+                                    <div class=" h-96">
+                                        <img src="{{ asset($itemSupplies->URL) }}" alt="{{ $itemSupplies->name }}"
+                                            class="w-full h-2/3 object-cover">
+                                        <div class="mt-6 px-8">
+                                            <h2 class="text-lg font-semibold text-gray-800">{{ $itemSupplies->name }}</h2>
+                                            <!-- Nếu cần thêm thông tin khác, bạn có thể thêm vào đây -->
+                                        </div>
+                                        <div class="flex justify-end mr-4 mt-4">
+                                            <a href="{{ route('product.create', ['id' => $itemSupplies->id]) }}"><i
+                                                    class="fa-solid fa-pen-to-square text-yellow-400 text-xl mr-2"></i></a>
+                                            <button type="button" class="delete_product" d-id = '{{ $itemSupplies->id }}'>
+                                                <i class="fa-solid fa-trash-can text-red-500 text-xl"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-end mr-4 mt-4">
-                                        <a href="{{ route('product.create', ['id' => $itemSupplies->id]) }}"><i
-                                                class="fa-solid fa-pen-to-square text-yellow-400 text-xl mr-2"></i></a>
-                                        <button type="button" class="delete_product" d-id = '{{ $itemSupplies->id }}'>
-                                            <i class="fa-solid fa-trash-can text-red-500 text-xl"></i>
-                                        </button>
+                                    <div class="flex justify-end mb-4 mr-4">
+                                        <i class="fa-solid fa-ellipsis text-xl transition transform hover:scale-110"></i>
                                     </div>
-                                </div>
-                                <div class="flex justify-end mb-4 mr-4">
-                                    <i class="fa-solid fa-ellipsis text-xl transition transform hover:scale-110"></i>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>

@@ -63,4 +63,13 @@ class SuppliesController extends Controller
 
         return redirect()->back();
     }
+
+    public function detail_product($id = null){
+
+        $detailProduct = $this->suppliesService->find($id);
+
+        $data = compact('detailProduct');
+
+        return view('supplies.detail_product',$data);
+    }
 }

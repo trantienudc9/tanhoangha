@@ -11,3 +11,4 @@ Route::get('them-san-pham/{id?}', [SuppliesController::class, 'create_product'])
 Route::post('store-product', [SuppliesController::class, 'store_product'])->name('product.store');
 Route::put('store-product', [SuppliesController::class, 'update_product'])->name('product.update');
 Route::delete('delete-product', [SuppliesController::class, 'delete_product'])->name('product.delete');
+Route::get('chi-tiet/{id?}', [SuppliesController::class, 'detail_product'])->name('product.detail');
