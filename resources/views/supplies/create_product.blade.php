@@ -22,7 +22,7 @@
                     placeholder="Nhập tên vật liệu" required value="{{ old('name', $dataSupplies->name ?? '') }}">
             </div>
             <div class="mb-4">
-                <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Hãng:</label>
+                <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Thương hiệu:</label>
                 <input type="text" id="type" name="type"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Nhập loại vật liệu" required value="{{ old('type', $dataSupplies->type ?? '') }}">
@@ -40,18 +40,24 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-4">
-                <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Trạng thái:</label>
-                <select id="status" name="status"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    required>
-                    @foreach (config('supplies.status') as $id => $name)
-                        <option value="{{ $id }}"
-                            {{ old('status', $dataSupplies->status ?? '') == $id ? 'selected' : '' }}>
-                            {{ $name }}
-                        </option>
-                    @endforeach
-                </select>
+            <div class="mb-4 add_kind">
+                @if (isset($dataSupplies->kind_product_type))
+                    @php
+                        $productType = $dataSupplies->product_type;
+                        $configData = $productType == 2 ? config('supplies.me') : config('supplies.metal');
+                    @endphp
+
+                    <label for="kind_product_type" class="block text-gray-700 text-sm font-bold mb-2">Sản phẩm:</label>
+                    <select id="kind_product_type" name="kind_product_type"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        @foreach ($configData as $id => $name)
+                            <option value="{{ $id }}"
+                                {{ old('kind_product_type', $dataSupplies->kind_product_type ?? '') == $id ? 'selected' : '' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
+                    </select>
+                @endif
             </div>
             <div class="mb-4">
                 <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Trạng thái:</label>
@@ -96,26 +102,51 @@
         </form>
     </div>
 
-    @section('script')
-        <script src="../js/create_products.js"></script>
-        <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
-        <script type="text/javascript">
-            $('#image').change(function() {
-                var file = this.files[0];
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#image-preview').empty(); // Clear previous preview
-                    var imgElement = $('<img>').attr({
-                        src: e.target.result,
-                        class: 'rounded-lg shadow-md',
-                        style: 'max-width: 100%;'
-                    });
-                    $('#image-preview').append(imgElement);
-                };
-                reader.readAsDataURL(file);
-                $('#file-name').text(file.name);
-            });
-        </script>
-    @stop
+@section('script')
+    {{-- <script src="../js/create_products.js"></script> --}}
+    <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
+    <script type="text/javascript">
+        $('#image').change(function() {
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview').empty(); // Clear previous preview
+                var imgElement = $('<img>').attr({
+                    src: e.target.result,
+                    class: 'rounded-lg shadow-md',
+                    style: 'max-width: 100%;'
+                });
+                $('#image-preview').append(imgElement);
+            };
+            reader.readAsDataURL(file);
+            $('#file-name').text(file.name);
+        });
+
+        $("#product_type").on("change", function() {
+            let productType = $(this).val();
+            let data = '';
+            let add_data = '';
+
+            if (productType == 2 || productType == 3) {
+                let data_type = (productType == 2) ? @json(config('supplies.me')) : @json(config('supplies.metal'));
+
+                data = Object.entries(data_type).map(([key, value]) =>
+                    `<option value="${key}">
+                            ${value}
+                        </option>`
+                ).join('');
+
+                add_data = `
+                        <label for="kind_product_type" class="block text-gray-700 text-sm font-bold mb-2">Sản phẩm:</label>
+                        <select id="kind_product_type" name="kind_product_type"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            ${data}
+                        </select>`;
+            }
+
+            $(".add_kind").html(add_data);
+        });
+    </script>
+@stop
 
 @stop
