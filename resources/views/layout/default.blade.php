@@ -14,7 +14,7 @@
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
     @vite('resources/css/app.css')
 </head>
-<body>
+<body class="bg-slate-100">
     {{-- <h1 class="text-3xl font-bold underline">
         Hello world!
       </h1> --}}
