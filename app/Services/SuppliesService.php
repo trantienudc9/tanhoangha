@@ -44,4 +44,9 @@ class SuppliesService extends BaseService
         $this->repository->update($request->id_product,$request->toArray());
     }
 
+    public function getTypeProducts($id,$product_type){
+        
+        return $this->repository->getProductItems($id,$product_type);
+    }
+
 }

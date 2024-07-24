@@ -13,4 +13,9 @@ class SuppliesRepository extends BaseRepository
         parent::__construct($supplies);
     }
 
+    public function getProductItems($id,$product_type){
+
+        return Supplies::where('id',$id)->where('product_type',$product_type)->get();
+    }
+
 }
