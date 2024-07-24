@@ -73,12 +73,12 @@ class SuppliesController extends Controller
         return view('supplies.detail_product',$data);
     }
 
-    public function items_products($id=null,$product_type=null){
-        
-        $typeProducts = $this->suppliesService->getTypeProducts($id,$product_type);
-        dd($typeProducts);
-        $data = compact('typeProducts','id');
-        
+    public function items_products($kind_product_type=null,$product_type=null){
+
+        $typeProducts = $this->suppliesService->getTypeProducts($kind_product_type,$product_type);
+
+        $data = compact('typeProducts','kind_product_type');
+
         return view('supplies.items_products',$data);
     }
 }
