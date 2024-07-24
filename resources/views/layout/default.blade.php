@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        @yield('title', 'Laravel') 
+        @yield('title', 'Laravel')
     </title>
     <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/jpg">
     {{-- <link rel="stylesheet" href="{{ asset('library/bootstrap-5.3.3-dist/css/bootstrap.min.css') }}"> --}}
@@ -97,7 +97,7 @@
                         <ul class="leading-10">
                             @foreach(config('supplies.me') as $id=>$itemMe)
                             <li>
-                                <a href="{{ route('product.items', ['id' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMe }}</a>
+                                <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMe }}</a>
                                 <hr class="effect hidden">
                             </li>
                             @endforeach
@@ -109,7 +109,7 @@
                         <ul class="leading-10">
                             @foreach(config('supplies.metal') as $itemMetal)
                             <li>
-                                <a href="#" class="text-black">{{ $itemMetal }}</a>
+                                <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMetal }}</a>
                                 <hr class="effect hidden">
                             </li>
                             @endforeach
@@ -187,7 +187,7 @@
             $('.css_effect a').hover(function() {
                 // Lấy chiều rộng của liên kết <a>
                 var width = $('.width_effect').outerWidth();
-                
+
                 // Hiển thị gạch chân (hr), thiết lập chiều rộng và màu sắc đỏ
                 $(this).next('.effect').removeClass('hidden').stop().css({
                     'width': '0',

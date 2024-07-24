@@ -12,5 +12,6 @@ Route::post('store-product', [SuppliesController::class, 'store_product'])->name
 Route::put('store-product', [SuppliesController::class, 'update_product'])->name('product.update');
 Route::delete('delete-product', [SuppliesController::class, 'delete_product'])->name('product.delete');
 Route::get('chi-tiet/{id?}', [SuppliesController::class, 'detail_product'])->name('product.detail');
-Route::get('san-pham/{id}/{product_type}', [SuppliesController::class, 'items_products'])->name('product.items');
+Route::get('san-pham/{kind_product_type}/{product_type}', [SuppliesController::class, 'items_products'])->name('product.items');
+
 
