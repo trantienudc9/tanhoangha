@@ -78,15 +78,7 @@
                         <hr class="my-2">
                         <ul class="leading-10">
                             <li>
-                                <a href="" class="text-black">Sản phẩm nổi bật</a>
-                                <hr class="effect hidden">
-                            </li>
-                            <li>
-                                <a href="#" class="text-black">Sản phẩm mới</a>
-                                <hr class="effect hidden">
-                            </li>
-                            <li>
-                                <a href="#" class="text-black">Tất cả</a>
+                                <a href="{{ route('product.items', ['kind_product_type' => 0, 'product_type' => 1]) }}" class="text-black">Sản phẩm nổi bật</a>
                                 <hr class="effect hidden">
                             </li>
                         </ul>

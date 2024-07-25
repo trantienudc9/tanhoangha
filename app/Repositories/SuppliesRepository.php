@@ -1,5 +1,4 @@
 <?php
-// app/Repositories/BaseRepository.php
 
 namespace App\Repositories;
 
@@ -14,8 +13,12 @@ class SuppliesRepository extends BaseRepository
     }
 
     public function getProductItems($kind_product_type,$product_type){
-
-        return Supplies::where('kind_product_type',$kind_product_type)->where('product_type',$product_type)->get();
+            
+            $supplies = Supplies::where('product_type',$product_type);
+            if($kind_product_type != 0){
+                $supplies->where('kind_product_type',$kind_product_type);
+            }
+        return $supplies->get();
     }
 
 }
