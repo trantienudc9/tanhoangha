@@ -6,7 +6,14 @@
 @stop
 
 @section('content')
+<div class="mt-4 mb-4 text-center">
+    <input type="text" id="search-input" class="px-4 py-2 border border-gray-300 rounded-md" placeholder="Tìm kiếm sản phẩm...">
+    <button id="btn-search" class="ml-2 px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-red-500 focus:outline-none focus:bg-gray-700 transition duration-150 ease-in-out">Tìm kiếm</button>
+</div>
     <div>
+        @php
+            $products = config('supplies.me');
+        @endphp
         <div class="relative">
             <div class="multiple-items">
                 <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
@@ -26,53 +33,75 @@
                         class="w-full h-full object-cover rounded-lg shadow-lg">
                 </div>
             </div>
+            <div class="py-4 w-full absolute z-10 bottom-0">
+                <div class="mx-auto px-2 sm:px-6 lg:px-8 max-w-7xl">
+                    <div class="relative z-10 top-20">
+                        <h1 class="text-4xl font-bold text-teal-600 mb-4 text-center">{{ isset($products[$kind_product_type]) ? $products[$kind_product_type] : 'Đá' }}</h1>
+                        <div class="relative flex flex-col sm:flex-row items-center justify-between h-auto sm:h-16">
+                            <div class="flex-grow sm:flex sm:ml-6 justify-center">
+                                <div class="flex uppercase">
+                                    <button id="btn-outstanding" class="dashboard-link text-2xl px-3 py-3 rounded-2xl text-sm font-medium leading-5 text-white hover:bg-red-500 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Sản phẩm nổi bật</button>
+                                    <button id="btn-news" class="ml-4 px-3 py-3 rounded-2xl text-2xl text-sm font-medium leading-5 text-white bg-teal-500 hover:bg-red-500 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Sản phẩm mới</button>
+                                    <button id="btn-common" class="ml-4 px-3 py-3 rounded-2xl text-2xl text-sm font-medium leading-5 text-white bg-teal-500 hover:bg-red-500 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Tất cả</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="opacity-85 bg-white py-20 w-full h-max absolute z-0 top-16 z-0"></div>
+            </div>
         </div>
 
-        <div>
-            @php
-                $products = config('supplies.me');
-            @endphp
+       
 
+    
+        <div class="mt-24 w-full md:w-2/3 mx-auto">
             <div class="bg-white p-4 rounded-lg shadow-lg">
-                <h1 class="text-4xl font-bold text-cyan-500 mb-4 text-center">{{ $products[$kind_product_type] }}</h1>
-
                 <div class="px-4 sm:px-8 md:px-12 lg:px-20">
-                    <!-- Sản phẩm nổi bật -->
-                    <h3 class="text-4xl font-medium text-cyan-400 mb-4">Sản phẩm nổi bật</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-                        @foreach ($typeProducts as $valProduct)
-                            @if ($valProduct->status == 2)
-                                @include('supplies.product_card')
-                            @endif
-                        @endforeach
-                    </div>
-
-                    <!-- Sản phẩm mới -->
-                    <h3 class="text-4xl font-medium text-cyan-400 mb-4 mt-8">Sản phẩm mới</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-                        @foreach ($typeProducts as $valProduct)
-                            @if ($valProduct->status == 3)
-                                @include('supplies.product_card')
-                            @endif
-                        @endforeach
-                    </div>
-
-                    <!-- Tất cả -->
-                    <h3 class="text-4xl font-medium text-cyan-400 mb-4 mt-8">Tất cả</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-                        @foreach ($typeProducts as $valProduct)
-                            @include('supplies.product_card')
-                        @endforeach
-                    </div>
+                    <!-- Content Section -->
+                    <div id="content">
+                        <div id="outstanding" class="content-item">
+                            <!-- Sản phẩm nổi bật -->
+                            <h3 class="text-3xl font-medium text-teal-500 mb-4">Sản phẩm nổi bật</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+                                @foreach ($typeProducts as $valProduct)
+                                    @if ($valProduct->status == 2)
+                                        @include('supplies.product_card')
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        <div id="news" class="content-item" style="display: none;">
+                            <!-- Sản phẩm mới -->
+                            <h3 class="text-3xl font-medium text-teal-500 mb-4">Sản phẩm mới</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+                                @foreach ($typeProducts as $valProduct)
+                                    @if ($valProduct->status == 3)
+                                        @include('supplies.product_card')
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        <div id="common" class="content-item" style="display: none;">
+                            <!-- Tất cả -->
+                            <h3 class="text-3xl font-medium text-teal-500 mb-4 check_find">Tất cả</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 display_item_find">
+                                @foreach ($typeProducts as $valProduct)
+                                    @include('supplies.product_card')
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>
+        
     </div>
     <form action="" id="delete-product-form">
         @csrf
         @method('DELETE')
     </form>
-
+          
 
 @section('script')
 
@@ -101,6 +130,73 @@
             speed: 3000,
             cssEase: 'linear' // Hoặc sử dụng 'ease' cho hiệu ứng mượt mà hơn
         });
+
+        $(document).ready(function() {
+            // Hiển thị mặc định nội dung "Sản phẩm nổi bật"
+            $("#outstanding").show();
+            // Đổi màu nền của button "Sản phẩm nổi bật" thành màu đỏ
+            $("#btn-outstanding").css("background-color", "#f56565");
+            // Xử lý sự kiện click cho button Sản phẩm nổi bật
+            $("#btn-outstanding").click(function() {
+                $(".content-item").hide(); // Ẩn tất cả các nội dung
+                $("#outstanding").show();  // Hiển thị nội dung "Sản phẩm nổi bật"
+                // Đổi màu nền của button "Sản phẩm nổi bật" thành màu đỏ
+                $(this).css("background-color", "#f56565");
+                // Đổi màu nền của các button khác thành màu teal
+                $("#btn-news, #btn-common").css("background-color", "#14B8A6");
+            });
+
+            // Xử lý sự kiện click cho button Sản phẩm mới
+            $("#btn-news").click(function() {
+                $(".content-item").hide(); // Ẩn tất cả các nội dung
+                $("#news").show();          // Hiển thị nội dung "Sản phẩm mới"
+                // Đổi màu nền của button "Sản phẩm mới" thành màu đỏ
+                $(this).css("background-color", "#f56565");
+                // Đổi màu nền của các button khác thành màu teal
+                $("#btn-outstanding, #btn-common").css("background-color", "#14B8A6");
+            });
+
+            // Xử lý sự kiện click cho button Tất cả
+            $("#btn-common").click(function() {
+                $('.check_find').html("Tất cả");
+                $(".content-item").hide(); // Ẩn tất cả các nội dung
+                $("#common").show();        // Hiển thị nội dung "Tất cả"
+                // Đổi màu nền của button "Tất cả" thành màu đỏ
+                $(this).css("background-color", "#f56565");
+                // Đổi màu nền của các button khác thành màu teal
+                $("#btn-outstanding, #btn-news").css("background-color", "#14B8A6");
+            });
+        });
+
+        $(document).ready(function() {
+            // Xử lý sự kiện click cho nút Tìm kiếm
+            $("#btn-search").click(function() {
+                var searchTerm = $("#search-input").val().trim().toLowerCase();
+
+                // Ẩn tất cả các sản phẩm
+                $(".content-item").hide();
+                // Nếu searchTerm không có giá trị, chỉ hiển thị sản phẩm nổi bật
+                if (searchTerm === '') {
+                    $("#outstanding").show();
+                } else {
+                    
+                    // Hiển thị các sản phẩm có từ khóa tìm kiếm trong phần Tất cả
+                    $("#common .search_item").each(function() {
+                        var productName = $(this).text().trim().toLowerCase();
+                        if (productName.includes(searchTerm)) {
+                            $('.check_find').html("Sản phẩm đã tìm kiếm");
+                            let checkTt = $(this).closest(".content-item").show();
+                        }
+                    });
+                }
+
+                // Đặt lại màu nền của các button danh mục sản phẩm về màu teal
+                $("#btn-outstanding, #btn-news, #btn-common").css("background-color", "#14B8A6");
+            });
+        });
+
+
+
     </script>
 @stop
 

@@ -37,13 +37,13 @@ class SuppliesController extends Controller
     public function store_product(Request $request)
     {
         // Validate request data
-        $request->validate([
-            'name' => 'required|string',
-            'type' => 'required|string',
-            'product_type' => 'required|integer',
-            'status' => 'required|integer',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra hình ảnh có hợp lệ không
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string',
+        //     'type' => 'required|string',
+        //     'product_type' => 'required|integer',
+        //     'status' => 'required|integer',
+        //     'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra hình ảnh có hợp lệ không
+        // ]);
 
         $this->suppliesService->storeProduct($request);
 
