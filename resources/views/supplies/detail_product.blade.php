@@ -16,7 +16,7 @@
                     <div class="flex items-center justify-between">
                         <h2 class="text-3xl font-semibold mb-2">{{$detailProduct->name}}</h2>
                         <div class="relative" title="Bổ sung thông số">
-                            <a href="">
+                            <a href="{{ route('conditioning.parameters',['id'  => $detailProduct->id]) }}">
                                 <button class="rounded-full bg-blue-500 text-white p-2 hover:bg-blue-600 transition duration-200 focus:outline-none">
                                     <i class="fa-solid fa-plus text-lg"></i>
                                 </button>
@@ -29,7 +29,7 @@
                         <div class="col-span-2 space-y-2">
                             <div class="flex items-start space-x-2">
                                 <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
-                                <p class="text-sm md:text-base"><strong>Công suất:</strong> 17.100 (Btu/h)</p>
+                                <p class="text-sm md:text-base"><strong>Công suất:</strong> {{ isset($parameter->capacity) ? $parameter->capacity : ''}}</p>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
@@ -37,23 +37,23 @@
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
-                                <p class="text-sm md:text-base"><strong>Xuất xứ:</strong> Thái Lan</p>
+                                <p class="text-sm md:text-base"><strong>Xuất xứ:</strong> {{ isset($parameter->origin) ? $parameter->origin : ''}}</p>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
-                                <p class="text-sm md:text-base"><strong>Loại máy:</strong> 2 chiều lạnh/ sưởi</p>
+                                <p class="text-sm md:text-base"><strong>Loại máy:</strong> {{ isset($parameter->type) ? $parameter->type : ''}}</p>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
-                                <p class="text-sm md:text-base"><strong>Loại gas:</strong> R32</p>
+                                <p class="text-sm md:text-base"><strong>Loại gas:</strong> {{ isset($parameter->gas_type) ? $parameter->gas_type : ''}}</p>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
-                                <p class="text-sm md:text-base"><strong>Công nghệ:</strong> Inverter</p>
+                                <p class="text-sm md:text-base"><strong>Công nghệ:</strong> {{ isset($parameter->technology) ? $parameter->technology : ''}}</p>
                             </div>
                             <div class="flex items-start space-x-2">
                                 <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
-                                <p class="text-sm md:text-base"><strong>Bảo hành:</strong> 12 tháng</p>
+                                <p class="text-sm md:text-base"><strong>Bảo hành:</strong>  {{ isset($parameter->warranty) ? $parameter->warranty : ''}}</p>
                             </div>
                             <hr>
                         </div>
