@@ -14,7 +14,8 @@
     <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/jpg">
     {{-- <link rel="stylesheet" href="{{ asset('library/bootstrap-5.3.3-dist/css/bootstrap.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('library/fontawesome-free-6.6.0-web/css/all.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('library/slick/slick/slick.css') }}"/>
+
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
     @vite('resources/css/app.css')
@@ -26,89 +27,96 @@
       </h1> --}}
     <div id="app">
         <div class="relative">
-            <nav class="bg-teal-500 text-white py-4 px-1.5">
-                <div class="container mx-auto flex justify-between items-center">
+            <nav class="bg-teal-500 text-white py-4">
+                <div class="container mx-auto px-4 flex justify-between items-center">
                     <!-- Logo -->
-                    <div class="ml-4">
+                    <div>
                         <a href="{{ route('product.index') }}" class="flex items-center">
-                            <img src="{{ asset('img/logo.jpg') }}" alt="" class="h-8">
+                            <img src="{{ asset('img/logo.jpg') }}" alt="Logo" class="h-8">
                         </a>
                     </div>
-                    <!-- Menu -->
-                    <ul class="flex space-x-4">
+                    <!-- Mobile menu button -->
+                    <div class="block lg:hidden">
+                        <button id="mobile-menu-button" class="text-white focus:outline-none">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- Desktop menu -->
+                    <ul class="hidden lg:flex lg:space-x-4">
                         <li><a href="{{ route('product.create') }}" class="hover:text-gray-200">Thêm sản phẩm</a></li>
                         <li><a href="#" class="hover:text-gray-200">Giới thiệu</a></li>
-                        <li><a href="#" class="hover:text-gray-200 display_product relative before:content-[''] hover:before:block before:hidden before:w-20 before:h-8 before:absolute before:top-full before:left-0">Sản phẩm</a></li>
-                        <li><a href="#" class="hover:text-gray-200">Lĩnh vực kinh doanh</a></li>
-                        <li><a href="#" class="hover:text-gray-200">Tin tức</a></li>
-                        <li><a href="#" class="hover:text-gray-200">Thư viện</a></li>
+                        <li>
+                            <a href="#" class="hover:text-gray-200 display_product relative before:content-[''] hover:before:block before:hidden before:w-20 before:h-8 before:absolute before:top-full before:left-0">Sản phẩm</a>
+                            <div class="bg-white w-full md:w-7/12 py-4 px-4 mx-auto opacity-90 absolute z-40 left-48 hidden show_product">
+                                <div class="grid css_effect grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="col-span-1 width_effect">
+                                        <a href="#" class="block text-black font-bold text-lg mb-2 transition-transform transform hover:scale-105">SẢN PHẨM VỀ ĐÁ</a>
+                                        <hr class="my-2">
+                                        <ul class="leading-10">
+                                            <li>
+                                                <a href="{{ route('product.items', ['kind_product_type' => 0, 'product_type' => 1]) }}" class="text-black">Sản phẩm nổi bật</a>
+                                                <hr class="effect hidden">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-span-1">
+                                        <a href="#" class="block font-bold text-black text-lg mb-2 transition-transform transform hover:scale-105">Sản phẩm về M&E</a>
+                                        <hr class="my-2">
+                                        <ul class="leading-10">
+                                            @foreach(config('supplies.me') as $id=>$itemMe)
+                                            <li>
+                                                <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMe }}</a>
+                                                <hr class="effect hidden">
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <div class="col-span-1">
+                                        <a href="#" class="block font-bold text-lg text-black mb-2 transition-transform transform hover:scale-105">VẬT TƯ KIM KHÍ & TIÊU HAO NHÀ MÁY</a>
+                                        <hr class="my-2">
+                                        <ul class="leading-10">
+                                            @foreach(config('supplies.metal') as $itemMetal)
+                                            <li>
+                                                <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMetal }}</a>
+                                                <hr class="effect hidden">
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                         <li><a href="#" class="hover:text-gray-200">Tuyển dụng</a></li>
                         <li><a href="#" class="hover:text-gray-200">Liên hệ</a></li>
+                        <li><a href="#" class="hover:text-gray-200">Tài khoản</a></li>
                     </ul>
-
-                    <!-- Search bar -->
-                    <div class="flex items-center space-x-4 relative">
-                        <div class="relative">
-                            <input type="text" placeholder="Tìm kiếm..."
-                                class="py-1 px-3 bg-white text-white border border-teal-400 rounded-md focus:outline-none focus:border-teal-600">
-                            <button class="absolute right-0 top-0 mt-1 mr-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-teal-400" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M15.293 13.707a1 1 0 0 1-1.414 1.414l-3.717-3.717a5.5 5.5 0 1 1 1.414-1.414l3.717 3.717zm-.707.707a7.5 7.5 0 1 0-10.606-10.606 7.5 7.5 0 0 0 10.606 10.606z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <!-- Auth buttons -->
-                        <div>
-                            <a href="#" class="py-2 px-4 bg-teal-700 text-white rounded-md hover:bg-teal-600">Đăng
-                                nhập</a>
-                            <a href="#" class="py-2 px-4 bg-teal-800 text-white rounded-md hover:bg-teal-900">Đăng
-                                ký</a>
-                        </div>
-                    </div>
+                </div>
+            
+                <!-- Mobile menu -->
+                <div id="mobile-menu" class="lg:hidden hidden">
+                    <ul class="bg-teal-500 text-white mt-2">
+                        <li><a href="{{ route('product.create') }}" class="block py-2 px-4 hover:bg-teal-400">Thêm sản phẩm</a></li>
+                        <li><a href="#" class="block py-2 px-4 hover:bg-teal-400">Giới thiệu</a></li>
+                        <li class="relative">
+                            <a href="#" class="block py-2 px-4 hover:bg-teal-400">Sản phẩm</a>
+                            <ul class="ml-4">
+                                <li><a href="{{ route('product.items', ['kind_product_type' => 0, 'product_type' => 1]) }}" class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">Sản phẩm về đá</a></li>
+                                @foreach(config('supplies.me') as $id=>$itemMe)
+                                <li><a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">{{ $itemMe }}</a></li>
+                                @endforeach
+                                @foreach(config('supplies.metal') as $itemMetal)
+                                <li><a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">{{ $itemMetal }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        <li><a href="#" class="block py-2 px-4 hover:bg-teal-400">Tuyển dụng</a></li>
+                        <li><a href="#" class="block py-2 px-4 hover:bg-teal-400">Liên hệ</a></li>
+                        <li><a href="#" class="block py-2 px-4 hover:bg-teal-400">Tài khoản</a></li>
+                    </ul>
                 </div>
             </nav>
-            <div class="bg-white w-full md:w-7/12 py-4 px-4 mx-auto opacity-90 absolute z-40 left-48 hidden show_product">
-                <div class="grid css_effect grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="col-span-1 width_effect">
-                        <a href="#" class="block text-black font-bold text-lg mb-2 transition-transform transform hover:scale-105">SẢN PHẨM VỀ ĐÁ</a>
-                        <hr class="my-2">
-                        <ul class="leading-10">
-                            <li>
-                                <a href="{{ route('product.items', ['kind_product_type' => 0, 'product_type' => 1]) }}" class="text-black">Sản phẩm nổi bật</a>
-                                <hr class="effect hidden">
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-span-1">
-                        <a href="#" class="block font-bold text-black text-lg mb-2 transition-transform transform hover:scale-105">Sản phẩm về M&E</a>
-                        <hr class="my-2">
-                        <ul class="leading-10">
-                            @foreach(config('supplies.me') as $id=>$itemMe)
-                            <li>
-                                <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMe }}</a>
-                                <hr class="effect hidden">
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="col-span-1">
-                        <a href="#" class="block font-bold text-lg text-black mb-2 transition-transform transform hover:scale-105">VẬT TƯ KIM KHÍ & TIÊU HAO NHÀ MÁY</a>
-                        <hr class="my-2">
-                        <ul class="leading-10">
-                            @foreach(config('supplies.metal') as $itemMetal)
-                            <li>
-                                <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMetal }}</a>
-                                <hr class="effect hidden">
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
         <main class="py-4">
 
@@ -163,7 +171,7 @@
         {{-- <script src="{{ asset('library/bootstrap-5.3.3-dist/js/bootstrap.min.js') }}"></script> --}}
         <script src="{{ asset('library/fontawesome-free-6.6.0-web/js/all.min.js') }}"></script>
         <script src="{{ asset('library/jquery-3.7.1.js') }}"></script>
-        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script type="text/javascript" src="{{ asset('library/slick/slick/slick.min.js') }}"></script>
         @yield('script')
         <script>
             $(document).ready(function() {
@@ -194,8 +202,13 @@
             });
         });
 
-
-
+        // JavaScript to toggle mobile menu
+        // JavaScript to toggle mobile menu
+        $(document).ready(function() {
+            $('#mobile-menu-button').click(function() {
+                $('#mobile-menu').toggleClass('hidden');
+            });
+        });
 
         </script>
     </div>

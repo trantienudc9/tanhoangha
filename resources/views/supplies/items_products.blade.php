@@ -6,10 +6,6 @@
 @stop
 
 @section('content')
-<div class="mt-4 mb-4 text-center">
-    <input type="text" id="search-input" class="px-4 py-2 border border-gray-300 rounded-md" placeholder="Tìm kiếm sản phẩm...">
-    <button id="btn-search" class="ml-2 px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-red-500 focus:outline-none focus:bg-gray-700 transition duration-150 ease-in-out">Tìm kiếm</button>
-</div>
     <div>
         @php
             $products = config('supplies.me');
@@ -51,15 +47,15 @@
                 <div class="opacity-85 bg-white py-20 w-full h-max absolute z-0 top-16 z-0"></div>
             </div>
         </div>
-
-       
-
     
         <div class="mt-24 w-full md:w-2/3 mx-auto">
-            <div class="bg-white p-4 rounded-lg shadow-lg">
+            <div class="bg-white p-4 rounded-lg shadow-lg relative min-h-40">
+                <div class="mt-4 mb-4 text-center absolute right-2 top-0">
+                    <input type="text" id="search-input" class="px-4 py-2 border border-gray-300 rounded-md" placeholder="Tìm kiếm sản phẩm...">
+                </div>
                 <div class="px-4 sm:px-8 md:px-12 lg:px-20">
                     <!-- Content Section -->
-                    <div id="content">
+                    <div id="content" class="">
                         <div id="outstanding" class="content-item">
                             <!-- Sản phẩm nổi bật -->
                             <h3 class="text-3xl font-medium text-teal-500 mb-4">Sản phẩm nổi bật</h3>
@@ -168,24 +164,51 @@
             });
         });
 
-        $(document).ready(function() {
-            // Xử lý sự kiện click cho nút Tìm kiếm
-            $("#btn-search").click(function() {
-                var searchTerm = $("#search-input").val().trim().toLowerCase();
+        // $(document).ready(function() {
+        //     $("#search-input").keydown(function(){
+        //         var searchTerm = $(this).val().trim().toLowerCase();
+        //         // Ẩn tất cả các sản phẩm
+        //         $(".content-item").hide();
+        //         // Nếu searchTerm không có giá trị, chỉ hiển thị sản phẩm nổi bật
+        //         if (searchTerm === '') {
+        //             $("#outstanding").show();
+        //         } else {
+                    
+        //             // Hiển thị các sản phẩm có từ khóa tìm kiếm trong phần Tất cả
+        //             $("#common .search_item").each(function() {
+        //                 var productName = $(this).text().trim().toLowerCase();
+        //                 if (productName.includes(searchTerm)) {
+        //                     $('.check_find').html("Sản phẩm đã tìm kiếm");
+        //                     let checkTt = $(this).closest(".content-item").show();
+        //                 }
+        //             });
+        //         }
 
+        //         // Đặt lại màu nền của các button danh mục sản phẩm về màu teal
+        //         $("#btn-outstanding, #btn-news, #btn-common").css("background-color", "#14B8A6");
+        //     })
+        // });
+        
+        $(document).ready(function() {
+            $("#search-input").on('input', function() {
+                var searchTerm = $(this).val().trim().toLowerCase();
                 // Ẩn tất cả các sản phẩm
                 $(".content-item").hide();
                 // Nếu searchTerm không có giá trị, chỉ hiển thị sản phẩm nổi bật
                 if (searchTerm === '') {
+                    $(".dashboard-link").css("background-color", "#f56565");
+                    console.log("r")
                     $("#outstanding").show();
                 } else {
-                    
-                    // Hiển thị các sản phẩm có từ khóa tìm kiếm trong phần Tất cả
+                    // Tạo biểu thức chính quy để tìm kiếm không phân biệt chữ hoa chữ thường và hỗ trợ tiếng Việt
+                    var regex = new RegExp(removeAccents(searchTerm), 'i');
+
+                    // Hiển thị các sản phẩm có từ khóa tìm kiếm trong phần "Sản phẩm tìm kiếm"
                     $("#common .search_item").each(function() {
                         var productName = $(this).text().trim().toLowerCase();
-                        if (productName.includes(searchTerm)) {
+                        if (regex.test(removeAccents(productName))) {
+                            $(this).closest(".content-item").show();
                             $('.check_find').html("Sản phẩm đã tìm kiếm");
-                            let checkTt = $(this).closest(".content-item").show();
                         }
                     });
                 }
@@ -193,7 +216,13 @@
                 // Đặt lại màu nền của các button danh mục sản phẩm về màu teal
                 $("#btn-outstanding, #btn-news, #btn-common").css("background-color", "#14B8A6");
             });
+
+            // Hàm loại bỏ dấu từ chuỗi
+            function removeAccents(str) {
+                return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+            }
         });
+
 
 
 
