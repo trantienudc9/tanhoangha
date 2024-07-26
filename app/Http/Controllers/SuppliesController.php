@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\SuppliesService;
-use App\Services\ConditioningService;
 use App\Http\Requests\SuppliesProductRequest;
 class SuppliesController extends Controller
 {
 
     protected $suppliesService;
-    protected $conditioningService;
 
-    public function __construct(SuppliesService $suppliesService, ConditioningService $conditioningService)
+    public function __construct(SuppliesService $suppliesService)
     {
         $this->suppliesService = $suppliesService;
-        $this->conditioningService = $conditioningService;
     }
     public function index()
     {
@@ -57,14 +54,17 @@ class SuppliesController extends Controller
         return redirect()->back();
     }
 
-    public function detail_product($id = null){
-
+    protected function renderProductView($viewName, $id = null) {
         $detailProduct = $this->suppliesService->find($id);
-        $parameter = $this->conditioningService->getFindSupplies($id);
+        return view($viewName, compact('detailProduct'));
+    }
 
-        $data = compact('detailProduct','parameter');
+    public function detail_product($id = null) {
+        return $this->renderProductView('supplies.detail_product', $id);
+    }
 
-        return view('supplies.detail_product',$data);
+    public function parameters($id = null) {
+        return $this->renderProductView('supplies.parameters', $id);
     }
 
     public function items_products($kind_product_type=null,$product_type=null){
@@ -74,5 +74,12 @@ class SuppliesController extends Controller
         $data = compact('typeProducts','kind_product_type');
 
         return view('supplies.items_products',$data);
+    }
+
+    public function update_parameters(Request $request){
+
+        $save = $this->suppliesService->updateParameters($request);
+
+        return 1;
     }
 }

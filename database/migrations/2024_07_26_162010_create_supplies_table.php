@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('kind_product_type')->nullable()->comment("Loại sản phẩm theo nhóm sản phẩm");
             $table->integer('status')->comment("1: là sản phẩm bình thường; 2: sản phẩm nổi bật ưa chuộng; 3: sản phẩm mới");
             $table->string('URL');
+            $table->longtext('parameters')->nullable();
+            $table->longtext('product_introduction')->nullable();
             $table->timestamps();
         });
     }
