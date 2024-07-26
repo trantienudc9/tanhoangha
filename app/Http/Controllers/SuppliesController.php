@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Services\SuppliesService;
+use App\Services\ConditioningService;
 
 class SuppliesController extends Controller
 {
 
     protected $suppliesService;
+    protected $conditioningService;
 
-    public function __construct(SuppliesService $suppliesService)
+    public function __construct(SuppliesService $suppliesService, ConditioningService $conditioningService)
     {
         $this->suppliesService = $suppliesService;
+        $this->conditioningService = $conditioningService;
     }
     public function index()
     {
@@ -67,8 +69,9 @@ class SuppliesController extends Controller
     public function detail_product($id = null){
 
         $detailProduct = $this->suppliesService->find($id);
+        $parameter = $this->conditioningService->getFindSupplies($id);
 
-        $data = compact('detailProduct');
+        $data = compact('detailProduct','parameter');
 
         return view('supplies.detail_product',$data);
     }
