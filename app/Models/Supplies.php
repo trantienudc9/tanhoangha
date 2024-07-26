@@ -14,7 +14,9 @@ class Supplies extends Model
         'product_type',
         'kind_product_type',
         'status',
-        'URL'
+        'URL',
+        'parameters',
+        'product_introduction'
     ];
 
 }

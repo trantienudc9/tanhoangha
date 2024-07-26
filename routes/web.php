@@ -16,8 +16,7 @@ Route::get('chi-tiet/{id?}', [SuppliesController::class, 'detail_product'])->nam
 Route::get('san-pham/{kind_product_type}/{product_type}', [SuppliesController::class, 'items_products'])->name('product.items');
 
 // infor_produc
-
-Route::get('thong-so-san-pham/{id}', [ConditioningController::class, 'parameters'])->name('conditioning.parameters');
-Route::post('store-conditioning', [ConditioningController::class, 'store_conditioning'])->name('conditioning.store_conditioning');
+Route::get('thong-so-san-pham/{id}', [SuppliesController::class, 'parameters'])->name('product.parameters');
+Route::put('update_parameters', [SuppliesController::class, 'update_parameters'])->name('product.update_parameters');
 
 

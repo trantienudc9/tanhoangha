@@ -36,7 +36,7 @@
                                 <img src="{{ asset('img/logo.jpg') }}" alt="Logo" class="h-8">
                             </a>
                         </div>
-    
+
                         <!-- Desktop menu -->
                         <ul class="hidden lg:flex lg:space-x-4 gap-4">
                             <li><a href="{{ route('product.create') }}" class="hover:text-gray-200 text-lg">Thêm sản phẩm</a></li>
@@ -94,9 +94,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                             </svg>
                         </button>
-                    </div>    
+                    </div>
                 </div>
-            
+
                 <!-- Mobile menu -->
                 <div id="mobile-menu" class="lg:hidden hidden">
                     <ul class="bg-teal-500 text-white mt-2">
@@ -175,6 +175,8 @@
         <script src="{{ asset('library/fontawesome-free-6.6.0-web/js/all.min.js') }}"></script>
         <script src="{{ asset('library/jquery-3.7.1.js') }}"></script>
         <script type="text/javascript" src="{{ asset('library/slick/slick/slick.min.js') }}"></script>
+        <script src="{{ asset('library/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('library/sweetalert2@11.js') }}"></script>
         @yield('script')
         <script>
             $(document).ready(function() {

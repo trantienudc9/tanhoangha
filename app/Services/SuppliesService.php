@@ -49,4 +49,15 @@ class SuppliesService extends BaseService
         return $this->repository->getProductItems($kind_product_type,$product_type);
     }
 
+    public function updateParameters($request){
+
+        $field = $request->check == 1 ? 'parameters' : 'product_introduction';
+
+        $data = [
+            $field => $request->content
+        ];
+
+        return $this->update($request->id,$data);
+    }
+
 }

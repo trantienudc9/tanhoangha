@@ -1,7 +1,7 @@
 <?php
 return [
     'product_type' => [
-        1 => 'Sản phẩm đá',
+        1 => 'Sản phẩm xây dựng',
         2 => 'Sản phẩm về M&E',
         3 => 'VẬT TƯ KIM KHÍ & TIÊU HAO NHÀ MÁY',
     ],
