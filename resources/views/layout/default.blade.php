@@ -28,70 +28,73 @@
     <div id="app">
         <div class="relative">
             <nav class="bg-teal-500 text-white py-4">
-                <div class="container mx-auto px-4 flex justify-between items-center">
-                    <!-- Logo -->
-                    <div>
-                        <a href="{{ route('product.index') }}" class="flex items-center">
-                            <img src="{{ asset('img/logo.jpg') }}" alt="Logo" class="h-8">
-                        </a>
+                <div class="flex">
+                    <div class="container mx-auto px-4 flex justify-start items-center">
+                        <!-- Logo -->
+                        <div class="mr-4">
+                            <a href="{{ route('product.index') }}" class="flex items-center">
+                                <img src="{{ asset('img/logo.jpg') }}" alt="Logo" class="h-8">
+                            </a>
+                        </div>
+    
+                        <!-- Desktop menu -->
+                        <ul class="hidden lg:flex lg:space-x-4 gap-4">
+                            <li><a href="{{ route('product.create') }}" class="hover:text-gray-200 text-lg">Thêm sản phẩm</a></li>
+                            <li><a href="#" class="hover:text-gray-200 text-lg">Giới thiệu</a></li>
+                            <li>
+                                <a href="#" class="hover:text-gray-200 display_product relative before:content-[''] hover:before:block before:hidden before:w-20 before:h-8 before:absolute before:top-full before:left-0 text-lg">Sản phẩm</a>
+                                <div class="bg-white w-full md:w-7/12 py-4 px-4 mx-auto opacity-90 absolute z-40 left-28 top-16 hidden show_product">
+                                    <div class="grid css_effect grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div class="col-span-1 width_effect">
+                                            <a href="#" class="block text-black font-bold text-lg mb-2 transition-transform transform hover:scale-105">SẢN PHẨM VỀ ĐÁ</a>
+                                            <hr class="my-2">
+                                            <ul class="leading-10">
+                                                <li>
+                                                    <a href="{{ route('product.items', ['kind_product_type' => 0, 'product_type' => 1]) }}" class="text-black">Sản phẩm nổi bật</a>
+                                                    <hr class="effect hidden">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-span-1">
+                                            <a href="#" class="block font-bold text-black text-lg mb-2 transition-transform transform hover:scale-105">Sản phẩm về M&E</a>
+                                            <hr class="my-2">
+                                            <ul class="leading-10">
+                                                @foreach(config('supplies.me') as $id=>$itemMe)
+                                                <li>
+                                                    <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMe }}</a>
+                                                    <hr class="effect hidden">
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="col-span-1">
+                                            <a href="#" class="block font-bold text-lg text-black mb-2 transition-transform transform hover:scale-105">VẬT TƯ KIM KHÍ & TIÊU HAO NHÀ MÁY</a>
+                                            <hr class="my-2">
+                                            <ul class="leading-10">
+                                                @foreach(config('supplies.metal') as $itemMetal)
+                                                <li>
+                                                    <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMetal }}</a>
+                                                    <hr class="effect hidden">
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="#" class="hover:text-gray-200 text-lg">Tuyển dụng</a></li>
+                            <li><a href="#" class="hover:text-gray-200 text-lg">Liên hệ</a></li>
+                            <li><a href="#" class="hover:text-gray-200 text-lg">Tài khoản</a></li>
+                        </ul>
                     </div>
-                    <!-- Mobile menu button -->
-                    <div class="block lg:hidden">
+                     <!-- Mobile menu button -->
+                     <div class="block lg:hidden mr-4">
                         <button id="mobile-menu-button" class="text-white focus:outline-none">
                             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                             </svg>
                         </button>
-                    </div>
-                    <!-- Desktop menu -->
-                    <ul class="hidden lg:flex lg:space-x-4">
-                        <li><a href="{{ route('product.create') }}" class="hover:text-gray-200">Thêm sản phẩm</a></li>
-                        <li><a href="#" class="hover:text-gray-200">Giới thiệu</a></li>
-                        <li>
-                            <a href="#" class="hover:text-gray-200 display_product relative before:content-[''] hover:before:block before:hidden before:w-20 before:h-8 before:absolute before:top-full before:left-0">Sản phẩm</a>
-                            <div class="bg-white w-full md:w-7/12 py-4 px-4 mx-auto opacity-90 absolute z-40 left-48 hidden show_product">
-                                <div class="grid css_effect grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div class="col-span-1 width_effect">
-                                        <a href="#" class="block text-black font-bold text-lg mb-2 transition-transform transform hover:scale-105">SẢN PHẨM VỀ ĐÁ</a>
-                                        <hr class="my-2">
-                                        <ul class="leading-10">
-                                            <li>
-                                                <a href="{{ route('product.items', ['kind_product_type' => 0, 'product_type' => 1]) }}" class="text-black">Sản phẩm nổi bật</a>
-                                                <hr class="effect hidden">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-span-1">
-                                        <a href="#" class="block font-bold text-black text-lg mb-2 transition-transform transform hover:scale-105">Sản phẩm về M&E</a>
-                                        <hr class="my-2">
-                                        <ul class="leading-10">
-                                            @foreach(config('supplies.me') as $id=>$itemMe)
-                                            <li>
-                                                <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMe }}</a>
-                                                <hr class="effect hidden">
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    <div class="col-span-1">
-                                        <a href="#" class="block font-bold text-lg text-black mb-2 transition-transform transform hover:scale-105">VẬT TƯ KIM KHÍ & TIÊU HAO NHÀ MÁY</a>
-                                        <hr class="my-2">
-                                        <ul class="leading-10">
-                                            @foreach(config('supplies.metal') as $itemMetal)
-                                            <li>
-                                                <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="text-black">{{ $itemMetal }}</a>
-                                                <hr class="effect hidden">
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li><a href="#" class="hover:text-gray-200">Tuyển dụng</a></li>
-                        <li><a href="#" class="hover:text-gray-200">Liên hệ</a></li>
-                        <li><a href="#" class="hover:text-gray-200">Tài khoản</a></li>
-                    </ul>
+                    </div>    
                 </div>
             
                 <!-- Mobile menu -->
@@ -100,8 +103,8 @@
                         <li><a href="{{ route('product.create') }}" class="block py-2 px-4 hover:bg-teal-400">Thêm sản phẩm</a></li>
                         <li><a href="#" class="block py-2 px-4 hover:bg-teal-400">Giới thiệu</a></li>
                         <li class="relative">
-                            <a href="#" class="block py-2 px-4 hover:bg-teal-400">Sản phẩm</a>
-                            <ul class="ml-4">
+                            <a href="#" class="block py-2 px-4 hover:bg-teal-400 product_mobile">Sản phẩm</a>
+                            <ul class="ml-4 show_product_mobile hidden">
                                 <li><a href="{{ route('product.items', ['kind_product_type' => 0, 'product_type' => 1]) }}" class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">Sản phẩm về đá</a></li>
                                 @foreach(config('supplies.me') as $id=>$itemMe)
                                 <li><a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}" class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">{{ $itemMe }}</a></li>
@@ -176,9 +179,9 @@
         <script>
             $(document).ready(function() {
                 $('.display_product, .show_product').hover(function() {
-                    $('.show_product').stop().fadeIn(600);;
+                    $('.show_product').stop().fadeIn(600);
                 }, function() {
-                    $('.show_product').stop().fadeOut(600);;
+                    $('.show_product').stop().fadeOut(600);
                 });
             });
 
@@ -208,6 +211,10 @@
             $('#mobile-menu-button').click(function() {
                 $('#mobile-menu').toggleClass('hidden');
             });
+
+            $('.product_mobile').click(function(){
+                $('.show_product_mobile').toggleClass('hidden');
+            })
         });
 
         </script>

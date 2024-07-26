@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\SuppliesService;
 use App\Services\ConditioningService;
-
+use App\Http\Requests\SuppliesProductRequest;
 class SuppliesController extends Controller
 {
 
@@ -36,27 +36,18 @@ class SuppliesController extends Controller
         return view('supplies.create_product',$data);
     }
 
-    public function store_product(Request $request)
+    public function store_product(SuppliesProductRequest $request)
     {
-        // Validate request data
-        // $request->validate([
-        //     'name' => 'required|string',
-        //     'type' => 'required|string',
-        //     'product_type' => 'required|integer',
-        //     'status' => 'required|integer',
-        //     'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra hình ảnh có hợp lệ không
-        // ]);
-
         $this->suppliesService->storeProduct($request);
 
-        return redirect()->back();
+        return redirect()->route('product.index');
     }
 
-    public function update_product(Request $request){
+    public function update_product(SuppliesProductRequest $request){
 
         $this->suppliesService->updateProduct($request);
 
-        return redirect()->back();
+        return redirect()->route('product.index');
     }
 
     public function delete_product(Request $request){

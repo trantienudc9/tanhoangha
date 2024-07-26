@@ -6,31 +6,48 @@
 @stop
 
 @section('content')
-    @php $isEdit = isset($dataSupplies) ? true : false; @endphp
-    <div class="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <form action="{{ $isEdit ? route('product.update') : route('product.store') }}" method="POST"
-            enctype="multipart/form-data">
-            @csrf
-            @if ($isEdit)
-                @method('PUT')
-            @endif
-            <input type="hidden" name="id_product" value="{{ isset($dataSupplies->id) ? $dataSupplies->id : '' }}">
+@php $isEdit = isset($dataSupplies) ? true : false; @endphp
+<div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 space-y-6">
+    <h1 class="text-2xl font-bold text-gray-900">{{ $isEdit ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm' }}</h1>
+    <form action="{{ $isEdit ? route('product.update') : route('product.store') }}" method="POST"
+        enctype="multipart/form-data" class="space-y-4">
+        @csrf
+        @if ($isEdit)
+            @method('PUT')
+        @endif
+        <input type="hidden" name="id_product" value="{{ isset($dataSupplies->id) ? $dataSupplies->id : '' }}">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Tên Vật Liệu -->
             <div class="mb-4">
-                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Tên vật liệu:</label>
+                <label for="name" class="block text-gray-700 text-sm font-medium mb-2">Tên vật liệu:</label>
                 <input type="text" id="name" name="name"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
+                    @error('name') border-red-500 @enderror"
                     placeholder="Nhập tên vật liệu" required value="{{ old('name', $dataSupplies->name ?? '') }}">
+                @error('name')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
+
+            <!-- Thương Hiệu -->
             <div class="mb-4">
-                <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Thương hiệu:</label>
+                <label for="type" class="block text-gray-700 text-sm font-medium mb-2">Thương hiệu:</label>
                 <input type="text" id="type" name="type"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
+                    @error('type') border-red-500 @enderror"
                     placeholder="Nhập loại vật liệu" required value="{{ old('type', $dataSupplies->type ?? '') }}">
+                @error('type')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
+
+            <!-- Loại Sản Phẩm -->
             <div class="mb-4">
-                <label for="product_type" class="block text-gray-700 text-sm font-bold mb-2">Loại sản phẩm:</label>
+                <label for="product_type" class="block text-gray-700 text-sm font-medium mb-2">Loại sản phẩm:</label>
                 <select id="product_type" name="product_type"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
+                    @error('product_type') border-red-500 @enderror"
                     required>
                     @foreach (config('supplies.product_type') as $id => $name)
                         <option value="{{ $id }}"
@@ -39,7 +56,12 @@
                         </option>
                     @endforeach
                 </select>
+                @error('product_type')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
+
+            <!-- Sản Phẩm -->
             <div class="mb-4 add_kind">
                 @if (isset($dataSupplies->kind_product_type))
                     @php
@@ -47,9 +69,10 @@
                         $configData = $productType == 2 ? config('supplies.me') : config('supplies.metal');
                     @endphp
 
-                    <label for="kind_product_type" class="block text-gray-700 text-sm font-bold mb-2">Sản phẩm:</label>
+                    <label for="kind_product_type" class="block text-gray-700 text-sm font-medium mb-2">Sản phẩm:</label>
                     <select id="kind_product_type" name="kind_product_type"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
+                        @error('kind_product_type') border-red-500 @enderror">
                         @foreach ($configData as $id => $name)
                             <option value="{{ $id }}"
                                 {{ old('kind_product_type', $dataSupplies->kind_product_type ?? '') == $id ? 'selected' : '' }}>
@@ -57,12 +80,18 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('kind_product_type')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 @endif
             </div>
+
+            <!-- Trạng Thái -->
             <div class="mb-4">
-                <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Trạng thái:</label>
+                <label for="status" class="block text-gray-700 text-sm font-medium mb-2">Trạng thái:</label>
                 <select id="status" name="status"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
+                    @error('status') border-red-500 @enderror"
                     required>
                     @foreach (config('supplies.status') as $id => $name)
                         <option value="{{ $id }}"
@@ -71,12 +100,17 @@
                         </option>
                     @endforeach
                 </select>
+                @error('status')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
+
+            <!-- Ảnh -->
             <div class="mb-4">
-                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Ảnh:</label>
+                <label for="image" class="block text-gray-700 text-sm font-medium mb-2">Ảnh:</label>
                 <div class="flex items-center">
                     <label
-                        class="w-full flex justify-center items-center px-4 py-2 bg-white text-blue-500 rounded-lg shadow-md tracking-wide uppercase border border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white">
+                        class="w-full flex justify-center items-center px-4 py-2 bg-white text-blue-500 rounded-lg shadow-md border border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -88,19 +122,31 @@
                         <input type='file' id="image" name="image" class="hidden" />
                     </label>
                 </div>
+                @error('image')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
+
+            <!-- Hiển Thị Ảnh -->
             <div id="image-preview" class="mb-4">
                 <!-- Hiển thị hình ảnh trước khi tải lên -->
                 @if (isset($dataSupplies->URL))
-                    <img src="{{ asset($dataSupplies->URL) }}" class="rounded-lg shadow-md" style="max-width: 100%;">
+                    <img src="{{ asset($dataSupplies->URL) }}" class="rounded-lg shadow-md w-full max-w-xs mx-auto">
                 @endif
             </div>
-            <div class="flex items-center justify-between">
-                <button type="submit"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ $isEdit ? 'Cập nhật' : 'Tạo sản phẩm' }}</button>
-            </div>
-        </form>
-    </div>
+        </div>
+
+        <!-- Nút Gửi -->
+        <div class="flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0">
+            <button type="submit"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $isEdit ? 'Cập nhật' : 'Tạo sản phẩm' }}</button>
+            <a href="{{ $isEdit ? route('product.index') : '#' }}" class="text-blue-500 hover:underline">{{ $isEdit ? 'Hủy' : 'Làm mới' }}</a>
+        </div>
+    </form>
+</div>
+
+
+
 
 @section('script')
     {{-- <script src="../js/create_products.js"></script> --}}
