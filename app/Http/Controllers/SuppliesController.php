@@ -71,7 +71,7 @@ class SuppliesController extends Controller
 
         $typeProducts = $this->suppliesService->getTypeProducts($kind_product_type,$product_type);
 
-        $data = compact('typeProducts','kind_product_type');
+        $data = compact('typeProducts','kind_product_type','product_type');
 
         return view('supplies.items_products',$data);
     }

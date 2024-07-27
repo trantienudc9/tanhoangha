@@ -8,7 +8,13 @@
 @section('content')
     <div>
         @php
-            $products = config('supplies.me');
+            if($product_type == 1){
+                $products = config('supplies.stone');
+            }elseif($product_type == 2){
+                $products = config('supplies.me');
+            }elseif($product_type == 3){
+                $products = config('supplies.metal');
+            }
         @endphp
         <div class="relative">
             <div class="multiple-items">
@@ -32,7 +38,7 @@
             <div class="py-4 w-full absolute z-10 bottom-0">
                 <div class="mx-auto px-2 sm:px-6 lg:px-8 max-w-7xl">
                     <div class="relative z-10 top-20">
-                        <h1 class="text-4xl font-bold text-teal-600 mb-4 text-center">{{ isset($products[$kind_product_type]) ? $products[$kind_product_type] : 'Đá' }}</h1>
+                        <h1 class="text-4xl font-bold text-teal-600 mb-4 text-center">{{ $products[$kind_product_type] }}</h1>
                         <div class="relative flex flex-col sm:flex-row items-center justify-between h-auto sm:h-16">
                             <div class="flex-grow sm:flex sm:ml-6 justify-center">
                                 <div class="flex uppercase">
@@ -47,7 +53,7 @@
                 <div class="opacity-85 bg-white py-20 w-full h-max absolute z-0 top-16 z-0"></div>
             </div>
         </div>
-    
+
         <div class="mt-24 w-full md:w-2/3 mx-auto">
             <div class="bg-white p-4 rounded-lg shadow-lg relative min-h-40">
                 <div class="mt-4 mb-4 text-center absolute right-2 top-0">
@@ -87,17 +93,17 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
     <form action="" id="delete-product-form">
         @csrf
         @method('DELETE')
     </form>
-          
+
 
 @section('script')
 
@@ -164,31 +170,6 @@
             });
         });
 
-        // $(document).ready(function() {
-        //     $("#search-input").keydown(function(){
-        //         var searchTerm = $(this).val().trim().toLowerCase();
-        //         // Ẩn tất cả các sản phẩm
-        //         $(".content-item").hide();
-        //         // Nếu searchTerm không có giá trị, chỉ hiển thị sản phẩm nổi bật
-        //         if (searchTerm === '') {
-        //             $("#outstanding").show();
-        //         } else {
-                    
-        //             // Hiển thị các sản phẩm có từ khóa tìm kiếm trong phần Tất cả
-        //             $("#common .search_item").each(function() {
-        //                 var productName = $(this).text().trim().toLowerCase();
-        //                 if (productName.includes(searchTerm)) {
-        //                     $('.check_find').html("Sản phẩm đã tìm kiếm");
-        //                     let checkTt = $(this).closest(".content-item").show();
-        //                 }
-        //             });
-        //         }
-
-        //         // Đặt lại màu nền của các button danh mục sản phẩm về màu teal
-        //         $("#btn-outstanding, #btn-news, #btn-common").css("background-color", "#14B8A6");
-        //     })
-        // });
-        
         $(document).ready(function() {
             $("#search-input").on('input', function() {
                 var searchTerm = $(this).val().trim().toLowerCase();

@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-    <div>     
+    <div>
         <div class="relative">
             <div class="multiple-items">
                 <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
@@ -22,20 +22,24 @@
                     <img src="{{ asset('img/background4.jpg') }}" alt="" class="w-full h-full object-cover rounded-lg shadow-lg">
                 </div>
             </div>
-        </div>     
-    
+        </div>
+
         <div>
             @php
                 // Tạo một mảng các danh mục sản phẩm với các thông tin cần hiển thị
                 $categories = [
                     [
                         'product_type' => 1,
-                        'title' => 'Sản phẩm đá',
-                        'subcategories' => [['kind_product_type' => null, 'title' => 'Sản phẩm nổi bật']],
+                        'title' => 'SẢN PHẨM VỀ ĐÁ',
+                        'subcategories' => [
+                            ['kind_product_type' => 1, 'title' => 'Đá ốp lát'],
+                            ['kind_product_type' => 2, 'title' => 'Lưới thép xây dựng'],
+                            ['kind_product_type' => 3, 'title' => 'Hàng rào Nhựa lõi thép'],
+                        ],
                     ],
                     [
                         'product_type' => 2,
-                        'title' => 'Sản phẩm về M&E',
+                        'title' => 'SẢN PHẨM VỀ M&E',
                         'subcategories' => [
                             ['kind_product_type' => 1, 'title' => 'Điều hòa'],
                             ['kind_product_type' => 2, 'title' => 'Ống thông gió'],
@@ -92,9 +96,9 @@
     <form action="" id="delete-product-form">
         @csrf
         @method('DELETE')
-    </form>    
-    
-    
+    </form>
+
+
 @section('script')
 
     <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
