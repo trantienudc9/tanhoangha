@@ -6,36 +6,33 @@
 @stop
 
 @section('content')
-    <div>     
+    <div>
         <div class="relative">
             <div class="multiple-items">
-                <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
-                    <img src="{{ asset('img/bacgroundn1.jpg') }}" alt="" class="w-full h-full object-cover rounded-lg shadow-lg">
-                </div>
-                <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
-                    <img src="{{ asset('img/background2.jpg') }}" alt="" class="w-full h-full object-cover rounded-lg shadow-lg">
-                </div>
-                <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
-                    <img src="{{ asset('img/background3.jpg') }}" alt="" class="w-full h-full object-cover rounded-lg shadow-lg">
-                </div>
-                <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
-                    <img src="{{ asset('img/background4.jpg') }}" alt="" class="w-full h-full object-cover rounded-lg shadow-lg">
-                </div>
+                @foreach ($backgrounds as $background)
+                    <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
+                        <img src="{{ asset($background->URL) }}" alt="" class="w-full h-full object-cover rounded-lg shadow-lg">
+                    </div>
+                @endforeach
             </div>
-        </div>     
-    
+        </div>
+
         <div>
             @php
                 // Tạo một mảng các danh mục sản phẩm với các thông tin cần hiển thị
                 $categories = [
                     [
                         'product_type' => 1,
-                        'title' => 'Sản phẩm đá',
-                        'subcategories' => [['kind_product_type' => null, 'title' => 'Sản phẩm nổi bật']],
+                        'title' => 'SẢN PHẨM VỀ ĐÁ',
+                        'subcategories' => [
+                            ['kind_product_type' => 1, 'title' => 'Đá ốp lát'],
+                            ['kind_product_type' => 2, 'title' => 'Lưới thép xây dựng'],
+                            ['kind_product_type' => 3, 'title' => 'Hàng rào Nhựa lõi thép'],
+                        ],
                     ],
                     [
                         'product_type' => 2,
-                        'title' => 'Sản phẩm về M&E',
+                        'title' => 'SẢN PHẨM VỀ M&E',
                         'subcategories' => [
                             ['kind_product_type' => 1, 'title' => 'Điều hòa'],
                             ['kind_product_type' => 2, 'title' => 'Ống thông gió'],
@@ -89,27 +86,13 @@
 
         </div>
     </div>
-    <form action="" id="delete-product-form">
-        @csrf
-        @method('DELETE')
-    </form>    
-    
-    
+    @include('supplies.form_delete')
+
+
 @section('script')
 
     <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
     <script type="text/javascript">
-        $(".delete_product").on("click", function(event) {
-            event.preventDefault(); // Prevent default behavior of the click event
-            let del = confirm("Are you sure you want to delete this holiday?");
-            if (del) {
-                let id = $(this).attr("d-id");
-                $("#delete-product-form").attr("action", "{{ route('product.delete') }}");
-                $("#delete-product-form").attr("method", "POST");
-                $("#delete-product-form").append('<input type="hidden" name="id" value=' + id + '>');
-                $("#delete-product-form").submit(); // Submit the form
-            }
-        });
 
         $('.multiple-items').slick({
             infinite: true,

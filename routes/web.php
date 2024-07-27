@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuppliesController;
-use App\Http\Controllers\ConditioningController;
+use App\Http\Controllers\ImageProductController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -19,4 +19,10 @@ Route::get('san-pham/{kind_product_type}/{product_type}', [SuppliesController::c
 Route::get('thong-so-san-pham/{id}', [SuppliesController::class, 'parameters'])->name('product.parameters');
 Route::put('update_parameters', [SuppliesController::class, 'update_parameters'])->name('product.update_parameters');
 
+// imgae_product
+
+Route::get('them-anh/{id?}', [ImageProductController::class, 'add_background'])->name('image.background');
+Route::post('store-background', [ImageProductController::class, 'store_background'])->name('image.store_background');
+Route::put('update-background', [ImageProductController::class, 'update_background'])->name('image.update_background');
+Route::delete('delete-background', [ImageProductController::class, 'delete_background'])->name('image.delete_background');
 
