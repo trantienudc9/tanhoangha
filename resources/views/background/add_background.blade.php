@@ -34,6 +34,7 @@
         <!-- Form gửi dữ liệu -->
         <form action="{{ $edit }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
+            @method('PUT')
             <input type="text" hidden name="id_background" value="{{ isset($itemBackground->id) ? $itemBackground->id : '' }}">
             <label for="select" class="block text-gray-800 text-xl font-semibold mb-4">Ảnh vật tư</label>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -98,10 +99,10 @@
             <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
                 <thead>
                     <tr class="bg-teal-500 text-white">
-                        <th class="py-3 px-4 text-center">Stt</th>
-                        <th class="py-3 px-4 text-center">Tên</th>
-                        <th class="py-3 px-4 text-center">Ảnh</th>
-                        <th class="py-3 px-4 text-center">Hành động</th>
+                        <th class="py-3 px-4 !text-center">Stt</th>
+                        <th class="py-3 px-4 !text-center">Tên</th>
+                        <th class="py-3 px-4 !text-center">Ảnh</th>
+                        <th class="py-3 px-4 !text-center">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,7 +120,7 @@
                                 <a href="{{ route('image.background', ['id' => $background->id]) }}">
                                     <i class="fa-solid fa-pen-to-square text-yellow-400 text-xl mr-2"></i>
                                 </a>
-                                <button type="button" class="delete_product" data-id="{{ $background->id }}">
+                                <button type="button" class="delete_background" onclick="deleteForm('{{ route('image.delete_background') }}',{{ $background->id }})">
                                     <i class="fa-solid fa-trash-can text-red-500 text-xl"></i>
                                 </button>
                             </td>
@@ -128,8 +129,9 @@
                 </tbody>
             </table>
         </div>
-
+        @include('supplies.form_delete')
     </div>
+
 
 @section('script')
 
@@ -222,6 +224,7 @@
                 }
             });
         });
+
     </script>
 
 @stop

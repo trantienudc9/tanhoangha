@@ -23,5 +23,6 @@ Route::put('update_parameters', [SuppliesController::class, 'update_parameters']
 
 Route::get('them-anh/{id?}', [ImageProductController::class, 'add_background'])->name('image.background');
 Route::post('store-background', [ImageProductController::class, 'store_background'])->name('image.store_background');
-Route::post('update-background', [ImageProductController::class, 'update_background'])->name('image.update_background');
+Route::put('update-background', [ImageProductController::class, 'update_background'])->name('image.update_background');
+Route::delete('delete-background', [ImageProductController::class, 'delete_background'])->name('image.delete_background');
 

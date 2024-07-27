@@ -9,11 +9,9 @@
             <!-- Nếu cần thêm thông tin khác, bạn có thể thêm vào đây -->
         </div>
         <div class="flex justify-end mr-4 mt-4">
-            <a
-                href="{{ route('product.create', ['id' => $valProduct->id]) }}"><i
+            <a href="{{ route('product.create', ['id' => $valProduct->id]) }}"><i
                     class="fa-solid fa-pen-to-square text-yellow-400 text-xl mr-2"></i></a>
-            <button type="button" class="delete_product"
-                d-id="{{ $valProduct->id }}">
+            <button type="button" class="delete_product" onclick="deleteForm('{{ route('product.delete') }}',{{ $valProduct->id }})">
                 <i class="fa-solid fa-trash-can text-red-500 text-xl"></i>
             </button>
         </div>

@@ -27,6 +27,7 @@ return [
         3 => 'Máy lọc không khí',
     ],
     'list_background' => [
+        1 => 'Trang chủ',
         11 => 'Đá ốp lát',
         12 => 'Lưới thép xây dựng',
         13 => 'Hàng rào Nhựa lõi thép',

@@ -16,7 +16,7 @@ class ImageProductController extends Controller
 
     public function add_background($id = null){
 
-        $backgrounds = $this->imageProductsService->all();
+        $backgrounds = $this->imageProductsService->getAll();
         $itemBackground = $this->imageProductsService->find($id);
 
         $data = compact('backgrounds','itemBackground');
@@ -36,5 +36,12 @@ class ImageProductController extends Controller
         $this->imageProductsService->storeBackground($request);
 
         return redirect()->route('image.background')->with('success', 'Ảnh nền đã được cập nhật thành công!');
+    }
+
+    public function delete_background(Request $request){
+
+        $this->imageProductsService->delete($request->id);
+
+        return redirect()->back()->with('delete', 'Ảnh nền đã được cập nhật thành công!');
     }
 }

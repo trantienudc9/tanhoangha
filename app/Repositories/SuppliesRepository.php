@@ -14,7 +14,7 @@ class SuppliesRepository extends BaseRepository
 
     public function getProductItems($kind_product_type,$product_type){
 
-        return Supplies::where('kind_product_type',$kind_product_type)->where('product_type',$product_type);
+        return Supplies::where('kind_product_type',$kind_product_type)->where('product_type',$product_type)->get();
     }
 
 }

@@ -41,7 +41,8 @@
                         <ul class="hidden lg:flex lg:space-x-4 gap-4">
                             <li><a href="{{ route('product.create') }}" class="hover:text-gray-200 text-lg">Thêm sản
                                     phẩm</a></li>
-                            <li><a href="{{ route('image.background') }}" class="hover:text-gray-200 text-lg">Ảnh nền</a></li>
+                            <li><a href="{{ route('image.background') }}" class="hover:text-gray-200 text-lg">Ảnh
+                                    nền</a></li>
                             <li><a href="#" class="hover:text-gray-200 text-lg">Giới thiệu</a></li>
                             <li>
                                 <a href="#"
@@ -251,6 +252,19 @@
                     $('.show_product_mobile').toggleClass('hidden');
                 })
             });
+
+            // form delete chung
+            function deleteForm(route,id) {
+                event.preventDefault(); // Prevent default behavior of the click event
+                let formDelete = $("#delete-form");
+                let del = confirm("Are you sure you want to delete this holiday?");
+                if (del) {
+                    formDelete.attr("action", `${route}`);
+                    formDelete.attr("method", "POST");
+                    formDelete.append('<input type="hidden" name="id" value=' + id + '>');
+                    formDelete.submit(); // Submit the form
+                }
+            }
         </script>
     </div>
 </body>

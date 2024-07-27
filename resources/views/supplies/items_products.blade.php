@@ -17,23 +17,13 @@
             }
         @endphp
         <div class="relative">
-            <div class="multiple-items">
-                <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
-                    <img src="{{ asset('img/bacgroundn1.jpg') }}" alt=""
-                        class="w-full h-full object-cover rounded-lg shadow-lg">
-                </div>
-                <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
-                    <img src="{{ asset('img/background2.jpg') }}" alt=""
-                        class="w-full h-full object-cover rounded-lg shadow-lg">
-                </div>
-                <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
-                    <img src="{{ asset('img/background3.jpg') }}" alt=""
-                        class="w-full h-full object-cover rounded-lg shadow-lg">
-                </div>
-                <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
-                    <img src="{{ asset('img/background4.jpg') }}" alt=""
-                        class="w-full h-full object-cover rounded-lg shadow-lg">
-                </div>
+            <div class="multiple-items min-h-28">
+                @foreach ($backgrounds as $background)
+                    <div class="w-full h-64 md:h-96 lg:h-128 xl:h-144">
+                        <img src="{{ asset($background->URL) }}" alt="lỗi"
+                            class="w-full h-full object-cover rounded-lg shadow-lg">
+                    </div>
+                @endforeach
             </div>
             <div class="py-4 w-full absolute z-10 bottom-0">
                 <div class="mx-auto px-2 sm:px-6 lg:px-8 max-w-7xl">
