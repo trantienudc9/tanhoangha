@@ -15,7 +15,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('library/bootstrap-5.3.3-dist/css/bootstrap.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('library/fontawesome-free-6.6.0-web/css/all.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('library/slick/slick/slick.css') }}" />
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
     @vite('resources/css/app.css')
@@ -41,6 +41,7 @@
                         <ul class="hidden lg:flex lg:space-x-4 gap-4">
                             <li><a href="{{ route('product.create') }}" class="hover:text-gray-200 text-lg">Thêm sản
                                     phẩm</a></li>
+                            <li><a href="{{ route('image.background') }}" class="hover:text-gray-200 text-lg">Ảnh nền</a></li>
                             <li><a href="#" class="hover:text-gray-200 text-lg">Giới thiệu</a></li>
                             <li>
                                 <a href="#"
@@ -204,6 +205,7 @@
         <script type="text/javascript" src="{{ asset('library/slick/slick/slick.min.js') }}"></script>
         <script src="{{ asset('library/tinymce/js/tinymce/tinymce.min.js') }}"></script>
         <script src="{{ asset('library/sweetalert2@11.js') }}"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
         @yield('script')
         <script>
             $(document).ready(function() {

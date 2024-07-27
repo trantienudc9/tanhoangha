@@ -23,7 +23,19 @@ return [
     ],
     'me' => [
         1 => 'Điều hòa',
-        2 => 'Ống thông gió ',
+        2 => 'Ống thông gió',
         3 => 'Máy lọc không khí',
+    ],
+    'list_background' => [
+        11 => 'Đá ốp lát',
+        12 => 'Lưới thép xây dựng',
+        13 => 'Hàng rào Nhựa lõi thép',
+        21 => 'Điều hòa',
+        22 => 'Ống thông gió',
+        23 => 'Máy lọc không khí',
+        31 => 'Bulong inox',
+        32 => 'Đá cắt đá mài',
+        33 => 'Dầu cắt gọt',
+        34 => 'Vật tư thiết bị phòng sạch',
     ],
 ];
