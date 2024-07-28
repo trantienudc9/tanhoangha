@@ -89,40 +89,11 @@
         </div>
 
     </div>
-    <form action="" id="delete-product-form">
-        @csrf
-        @method('DELETE')
-    </form>
-
 
 @section('script')
 
     <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
     <script type="text/javascript">
-        $(".delete_product").on("click", function(event) {
-            event.preventDefault(); // Prevent default behavior of the click event
-            let del = confirm("Are you sure you want to delete this holiday?");
-            if (del) {
-                let id = $(this).attr("d-id");
-                $("#delete-product-form").attr("action", "{{ route('product.delete') }}");
-                $("#delete-product-form").attr("method", "POST");
-                $("#delete-product-form").append('<input type="hidden" name="id" value=' + id + '>');
-                $("#delete-product-form").submit(); // Submit the form
-            }
-        });
-
-        $('.multiple-items').slick({
-            infinite: true,
-            slidesToShow: 1,
-            autoplay: true,
-            autoplaySpeed: 2000, // Đặt autoplaySpeed thích hợp cho tốc độ muốn
-            arrows: false,
-            draggable: true,
-            fade: true, // Áp dụng hiệu ứng fade
-            speed: 3000,
-            cssEase: 'linear' // Hoặc sử dụng 'ease' cho hiệu ứng mượt mà hơn
-        });
-
         $(document).ready(function() {
             // Hiển thị mặc định nội dung "Sản phẩm nổi bật"
             $("#outstanding").show();
@@ -193,9 +164,6 @@
                 return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
             }
         });
-
-
-
 
     </script>
 @stop

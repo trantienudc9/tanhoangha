@@ -17,4 +17,8 @@ class SuppliesRepository extends BaseRepository
         return Supplies::where('kind_product_type',$kind_product_type)->where('product_type',$product_type)->get();
     }
 
+    public function statusOutstanding(){
+        return Supplies::where('status',2)->get();
+    }
+
 }

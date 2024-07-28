@@ -22,9 +22,6 @@
 </head>
 
 <body class="bg-slate-100">
-    {{-- <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1> --}}
     <div id="app">
         <div class="relative">
             <nav class="bg-teal-500 text-white py-4">
@@ -39,11 +36,12 @@
 
                         <!-- Desktop menu -->
                         <ul class="hidden lg:flex lg:space-x-4 gap-4">
+                            <li><a href="{{ route('product.index') }}" class="hover:text-gray-200 text-lg">Trang chủ</a></li>
                             <li><a href="{{ route('product.create') }}" class="hover:text-gray-200 text-lg">Thêm sản
                                     phẩm</a></li>
                             <li><a href="{{ route('image.background') }}" class="hover:text-gray-200 text-lg">Ảnh
                                     nền</a></li>
-                            <li><a href="#" class="hover:text-gray-200 text-lg">Giới thiệu</a></li>
+                            <li><a href="{{ route('product.introduce') }}" class="hover:text-gray-200 text-lg">Giới thiệu</a></li>
                             <li>
                                 <a href="#"
                                     class="hover:text-gray-200 display_product relative before:content-[''] hover:before:block before:hidden before:w-20 before:h-8 before:absolute before:top-full before:left-0 text-lg">Sản
@@ -99,8 +97,8 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="#" class="hover:text-gray-200 text-lg">Tuyển dụng</a></li>
-                            <li><a href="#" class="hover:text-gray-200 text-lg">Liên hệ</a></li>
+                            <li><a href="{{ route('product.recruitment') }}" class="hover:text-gray-200 text-lg">Tuyển dụng</a></li>
+                            <li><a href="{{ route('product.contact') }}" class="hover:text-gray-200 text-lg">Liên hệ</a></li>
                             <li><a href="#" class="hover:text-gray-200 text-lg">Tài khoản</a></li>
                         </ul>
                     </div>
@@ -198,7 +196,8 @@
                 </div>
             </div>
         </footer>
-
+        {{-- form delete --}}
+        @include('supplies.form_delete')
 
         {{-- <script src="{{ asset('library/bootstrap-5.3.3-dist/js/bootstrap.min.js') }}"></script> --}}
         <script src="{{ asset('library/fontawesome-free-6.6.0-web/js/all.min.js') }}"></script>
@@ -242,7 +241,6 @@
             });
 
             // JavaScript to toggle mobile menu
-            // JavaScript to toggle mobile menu
             $(document).ready(function() {
                 $('#mobile-menu-button').click(function() {
                     $('#mobile-menu').toggleClass('hidden');
@@ -255,6 +253,7 @@
 
             // form delete chung
             function deleteForm(route,id) {
+                console.log("d");
                 event.preventDefault(); // Prevent default behavior of the click event
                 let formDelete = $("#delete-form");
                 let del = confirm("Are you sure you want to delete this holiday?");
@@ -263,8 +262,22 @@
                     formDelete.attr("method", "POST");
                     formDelete.append('<input type="hidden" name="id" value=' + id + '>');
                     formDelete.submit(); // Submit the form
+                    console.log("tỉn");
                 }
             }
+
+        // Chạy ảnh nền
+        $('.multiple-items').slick({
+            infinite: true,
+            slidesToShow: 1,
+            autoplay: true,
+            autoplaySpeed: 2000, // Đặt autoplaySpeed thích hợp cho tốc độ muốn
+            arrows: false,
+            draggable: true,
+            fade: true, // Áp dụng hiệu ứng fade
+            speed: 2000,
+            cssEase: 'linear' // Hoặc sử dụng 'ease' cho hiệu ứng mượt mà hơn
+        });
         </script>
     </div>
 </body>

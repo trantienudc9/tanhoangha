@@ -34,7 +34,7 @@
         <!-- Form gửi dữ liệu -->
         <form action="{{ $edit }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
-            @method('PUT')
+            {{ isset($itemBackground) ? method_field('PUT') : '' }}
             <input type="text" hidden name="id_background" value="{{ isset($itemBackground->id) ? $itemBackground->id : '' }}">
             <label for="select" class="block text-gray-800 text-xl font-semibold mb-4">Ảnh vật tư</label>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -129,7 +129,6 @@
                 </tbody>
             </table>
         </div>
-        @include('supplies.form_delete')
     </div>
 
 

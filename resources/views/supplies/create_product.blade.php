@@ -1,6 +1,6 @@
 @extends('layout.default')
 @section('title')
-    Trang chủ
+    Thêm sản phẩm
     @parent
 
 @stop
@@ -144,9 +144,16 @@
             <!-- Nút Gửi -->
             <div class="flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0">
                 <button type="submit"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $isEdit ? 'Cập nhật' : 'Tạo sản phẩm' }}</button>
-                <a href="{{ $isEdit ? route('product.index') : '#' }}"
-                    class="text-blue-500 hover:underline">{{ $isEdit ? 'Hủy' : 'Làm mới' }}</a>
+                    class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $isEdit ? 'Cập nhật' : 'Tạo sản phẩm' }}</button>
+                @if($isEdit)
+                    <a href="{{ route('product.index') }}"
+                    class="text-blue-500 hover:underline">Quay lại</a>
+                @else
+                <button type="reset" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Làm mới
+                </button>
+                @endif
+
             </div>
         </form>
     </div>
@@ -202,7 +209,7 @@
                 $(".add_kind").html(add_data);
             });
         });
-        F
+
     </script>
 @stop
 

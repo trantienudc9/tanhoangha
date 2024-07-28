@@ -14,6 +14,9 @@ Route::put('update-product', [SuppliesController::class, 'update_product'])->nam
 Route::delete('delete-product', [SuppliesController::class, 'delete_product'])->name('product.delete');
 Route::get('chi-tiet/{id?}', [SuppliesController::class, 'detail_product'])->name('product.detail');
 Route::get('san-pham/{kind_product_type}/{product_type}', [SuppliesController::class, 'items_products'])->name('product.items');
+Route::get('gioi-thieu', [SuppliesController::class, 'introduce_products'])->name('product.introduce');
+Route::get('tuyen-dung', [SuppliesController::class, 'recruitment_products'])->name('product.recruitment');
+Route::get('lien-he', [SuppliesController::class, 'contact_products'])->name('product.contact');
 
 // infor_produc
 Route::get('thong-so-san-pham/{id}', [SuppliesController::class, 'parameters'])->name('product.parameters');

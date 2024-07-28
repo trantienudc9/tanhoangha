@@ -60,16 +60,9 @@
                 {!! $detailProduct->product_introduction !!}
             </div>
         </div>
-
     </div>
-    <form action="" id="delete-product-form">
-        @csrf
-        @method('DELETE')
-    </form>
 
 @section('script')
-
-
     <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
     <script type="text/javascript"></script>
 @stop

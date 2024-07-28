@@ -21,7 +21,8 @@ class SuppliesController extends Controller
     public function index()
     {
 
-        $supplies = $this->suppliesService->all();
+        $supplies = $this->suppliesService->getProductOutstanding();
+
         $backgrounds = $this->imageProductsService->getbackground(1);
 
         $data = compact('supplies','backgrounds');
@@ -88,5 +89,28 @@ class SuppliesController extends Controller
         $save = $this->suppliesService->updateParameters($request);
 
         return 1;
+    }
+
+    public function introduce_products(){
+
+        $backgrounds = $this->imageProductsService->getbackground(1);
+
+        $data = compact('backgrounds');
+        return view('supplies.introduce',$data);
+    }
+
+    public function recruitment_products(){
+
+        $backgrounds = $this->imageProductsService->getbackground(1);
+
+        $data = compact('backgrounds');
+        return view('supplies.recruitment',$data);
+    }
+
+    public function contact_products(){
+        $backgrounds = $this->imageProductsService->getbackground(1);
+
+        $data = compact('backgrounds');
+        return view('supplies.contact',$data);
     }
 }

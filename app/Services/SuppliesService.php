@@ -60,4 +60,9 @@ class SuppliesService extends BaseService
         return $this->update($request->id,$data);
     }
 
+    public function getProductOutstanding(){
+
+        return $this->repository->statusOutstanding();
+    }
+
 }

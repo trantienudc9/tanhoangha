@@ -66,10 +66,6 @@
         </div>
 
     </div>
-    <form action="" id="delete-product-form">
-        @csrf
-        @method('DELETE')
-    </form>
 
 @section('script')
 
@@ -166,33 +162,7 @@
                     });
                 }
             });
-
         }
-        // $(function() {
-        //     $('#update_parameters').on('click', function(e) {
-
-        //         let content = tinymce.get('edit_product').getContent();
-        //         let csrfToken = $('meta[name="csrf-token"]').attr('content'); // Lấy CSRF token từ meta tag
-        //         $.ajax({
-        //             url: '{{ route('product.update_parameters') }}', // Route đến controller
-        //             type: 'POST',
-        //             data: {
-        //                 id: {{ $detailProduct->id }},
-        //                 parameters: content
-        //             },
-        //             headers: {
-        //                 'X-HTTP-Method-Override': 'PUT', // Cần thêm header này để giả lập PUT
-        //                 'X-CSRF-TOKEN': csrfToken // CSRF token
-        //             },
-        //             success: function(response) {
-        //                 console.log(response);
-        //             },
-        //             error: function(xhr) {
-        //                 alert('An error occurred: ' + xhr.statusText);
-        //             }
-        //         });
-        //     });
-        // });
     </script>
 @stop
 

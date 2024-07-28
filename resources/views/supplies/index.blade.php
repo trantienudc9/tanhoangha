@@ -61,13 +61,12 @@
                 @if ($filteredSupplies->isNotEmpty())
                     <div class="bg-white p-4 rounded-lg shadow-lg">
                         <h1 class="text-4xl font-bold text-teal-500 mb-4 text-center">{{ $category['title'] }}</h1>
-                        <div class="px-28">
+                        <div class="lg:px-28 md:px-20">
                             @foreach ($category['subcategories'] as $subcategory)
                                 @php
                                     // Lọc danh sách sản phẩm theo loại và phân loại con cụ thể
                                     $filteredSubSupplies = $filteredSupplies
-                                        ->where('kind_product_type', $subcategory['kind_product_type'])
-                                        ->where('status', 2);
+                                        ->where('kind_product_type', $subcategory['kind_product_type']);
                                 @endphp
 
                                 @if ($filteredSubSupplies->isNotEmpty())
@@ -86,25 +85,11 @@
 
         </div>
     </div>
-    @include('supplies.form_delete')
-
 
 @section('script')
 
     <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
     <script type="text/javascript">
-
-        $('.multiple-items').slick({
-            infinite: true,
-            slidesToShow: 1,
-            autoplay: true,
-            autoplaySpeed: 2000, // Đặt autoplaySpeed thích hợp cho tốc độ muốn
-            arrows: false,
-            draggable: true,
-            fade: true, // Áp dụng hiệu ứng fade
-            speed: 3000,
-            cssEase: 'linear' // Hoặc sử dụng 'ease' cho hiệu ứng mượt mà hơn
-        });
 
     </script>
 @stop
