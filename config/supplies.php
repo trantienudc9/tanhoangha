@@ -11,7 +11,7 @@ return [
         3 => 'Sản phẩm mới',
     ],
     'stone' => [
-        1 => 'Đá ốp lát',
+        1 => 'Đá tự nhiên',
         2 => 'Lưới thép xây dựng',
         3 => 'Hàng rào Nhựa lõi thép',
     ],
