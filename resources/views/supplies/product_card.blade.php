@@ -6,12 +6,16 @@
             <!-- Thêm thông tin khác nếu cần -->
         </div>
         <div class="flex justify-end items-center px-4 sm:px-8 py-4">
-            <a href="{{ route('product.create', ['id' => $valProduct->id]) }}" class="text-yellow-400 hover:text-yellow-500">
-                <i class="fa-solid fa-pen-to-square text-xl mr-2"></i>
-            </a>
-            <button type="button" class="delete_product ml-2" onclick="deleteForm('{{ route('product.delete') }}', {{ $valProduct->id }})">
-                <i class="fa-solid fa-trash-can text-red-500 text-xl"></i>
-            </button>
+            @can('update')
+                <a href="{{ route('product.create', ['id' => $valProduct->id]) }}" class="text-yellow-400 hover:text-yellow-500">
+                    <i class="fa-solid fa-pen-to-square text-xl mr-2"></i>
+                </a>
+            @endcan
+            @can('delete')
+                <button type="button" class="delete_product ml-2" onclick="deleteForm('{{ route('product.delete') }}', {{ $valProduct->id }})">
+                    <i class="fa-solid fa-trash-can text-red-500 text-xl"></i>
+                </button>
+            @endcan
         </div>
     </div>
     <div class="flex justify-end items-center px-4 sm:px-8 py-2">

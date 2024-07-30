@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Services\SuppliesService;
 use App\Http\Requests\SuppliesProductRequest;
 use App\Services\ImageProductsService;
-
+use Illuminate\Support\Facades\Auth;
+// use Spatie\Permission\Models\Role;
 class SuppliesController extends Controller
 {
 
@@ -20,7 +21,10 @@ class SuppliesController extends Controller
     }
     public function index()
     {
+        // $user = Auth::user();
+        // $user->assignRole('admin');
 
+        // $role = Role::create(['name' => 'writer']);
         $supplies = $this->suppliesService->getProductOutstanding();
 
         $backgrounds = $this->imageProductsService->getbackground(1);
