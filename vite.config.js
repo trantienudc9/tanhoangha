@@ -7,7 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/pages/product_form.js'
+                'resources/js/pages/product_form.js',
+                'resources/js/pages/add_background.js',
             ],
             refresh: true,
         }),
@@ -17,6 +18,10 @@ export default defineConfig({
         alias: {
             '$': 'jquery/src/jquery'
         },
+    },
+
+    optimizeDeps: {
+        include: ['tinymce']
     },
 
 });
