@@ -1,11 +1,4 @@
-@extends('layout.default')
-
-@section('title')
-    Tuyển dụng
-    @parent
-@stop
-
-@section('content')
+<x-app-layout>
     <div>
         <div class="container mx-auto py-8">
             <h1 class="text-3xl font-semibold text-center mb-8">Các Đãi Ngộ và Lợi Ích tại Công ty ABC</h1>
@@ -168,10 +161,4 @@
             </div>
         </div>
     </div>
-
-@section('script')
-    <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
-    <script type="text/javascript"></script>
-@stop
-
-@stop
+</x-app-layout>

@@ -18,7 +18,7 @@ import tinymce from 'tinymce/tinymce';
 //       plugins: 'paste link table image',
 //       toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image'
 //     });
-//   }, 5000); 
+//   }, 5000);
 tinymce.init({
     selector: 'textarea',  // Áp dụng TinyMCE cho tất cả các textarea
     plugins: 'advlist autolink lists link image charmap preview anchor textcolor',
@@ -86,7 +86,7 @@ tinymce.init({
 //     });
 // });
 // function updateParameters(check) {
-    
+
 //     let content = tinymce.get(check === 1 ? 'edit_product' : 'edit_introduction').getContent();
 
 //     let csrfToken = $('meta[name="csrf-token"]').attr('content'); // Lấy CSRF token từ meta tag

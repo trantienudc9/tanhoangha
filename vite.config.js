@@ -9,6 +9,11 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/pages/product_form.js',
                 'resources/js/pages/add_background.js',
+                'resources/js/pages/create_product.js',
+                // Thêm dòng này để import DataTables
+                // 'node_modules/datatables.net-dt/css/jquery.dataTables.css',
+                // 'node_modules/datatables.net/js/jquery.dataTables.js',
+                // 'node_modules/tinymce/tinymce.min.js',
             ],
             refresh: true,
         }),

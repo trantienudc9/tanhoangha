@@ -1,15 +1,4 @@
-
-import $ from 'jquery';
-import 'datatables.net';
-$(document).ready(function() {
-    // Lắng nghe sự kiện click trên nút chọn ảnh
-    $('#chooseImage').on('click', function() {
-        // Kích hoạt input file khi nút chọn ảnh được nhấp
-        $('#fileInput').click();
-    });
-});
-
-    // Lắng nghe sự kiện thay đổi trên input file
+   // Lắng nghe sự kiện thay đổi trên input file
 $('#fileInput').on('change', function(event) {
     // Lấy tệp được chọn từ input
     const file = event.target.files[0];
@@ -47,15 +36,24 @@ $('#fileInput').on('change', function(event) {
 });
 
 $(document).ready(function() {
-    // Khởi tạo DataTable cho bảng của bạn
     $('table').DataTable({
-        "paging": true, // Cho phép phân trang
-        "searching": true, // Cho phép tìm kiếm
-        "info": true, // Hiển thị thông tin bảng (hiển thị số lượng bản ghi)
-        "responsive": true // Tự động điều chỉnh kích thước bảng cho các thiết bị di động
+        paging: true,
+        searching: true,
+        info: true,
+        responsive: true,
+        language: {
+            search: "Tìm kiếm:",
+            lengthMenu: "Hiển thị _MENU_ mục",
+            info: "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+            paginate: {
+                first: "Trang đầu",
+                last: "Trang cuối",
+                next: "Tiếp",
+                previous: "Trước"
+            }
+        }
     });
 
-    // Lắng nghe sự kiện click trên nút chọn ảnh
     $('#chooseImage').on('click', function() {
         $('#fileInput').click();
     });
@@ -70,8 +68,7 @@ $(document).ready(function() {
             reader.onload = function(e) {
                 let content;
                 if (file.type.startsWith('image/')) {
-                    content =
-                        `<img src="${e.target.result}" class="file-preview rounded-lg shadow-lg max-w-full h-auto" alt="Preview">`;
+                    content = `<img src="${e.target.result}" class="file-preview rounded-lg shadow-lg max-w-full h-auto" alt="Preview">`;
                 } else {
                     content = `
         <div class="bg-white p-4 rounded-lg shadow-md">

@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import 'slick-carousel';
 $(document).ready(function() {
     $('.display_product, .show_product').hover(function() {
@@ -51,3 +50,4 @@ $('.multiple-items').slick({
     speed: 2000,
     cssEase: 'linear' // Hoặc sử dụng 'ease' cho hiệu ứng mượt mà hơn
 });
+

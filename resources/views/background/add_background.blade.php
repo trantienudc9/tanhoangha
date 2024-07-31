@@ -1,8 +1,5 @@
-
-@vite(['resources/js/pages/add_background.js'])
-
 <x-app-layout>
-    
+
     <div class="max-w-7xl mx-auto px-6 py-8 bg-white from-blue-100 via-purple-100 to-pink-100 rounded-xl shadow-lg">
         <!-- Hiển thị thông báo lỗi nếu có -->
         @if ($errors->any())
@@ -127,3 +124,4 @@
         </div>
     </div>
 </x-app-layout>
+@vite(['resources/js/pages/add_background.js'])

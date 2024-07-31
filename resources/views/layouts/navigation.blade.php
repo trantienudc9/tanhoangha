@@ -1,5 +1,6 @@
 @vite(['resources/js/pages/product_form.js'])
-<nav x-data="{ open: false }" class="bg-teal-500 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 text-white">
+<nav x-data="{ open: false }"
+    class="bg-teal-500 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 text-white">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -27,7 +28,7 @@
                     </x-nav-link>
                     <x-nav-link :href="route('product.introduce')" :active="request()->routeIs('product.introduce')" class="display_product">
                         {{ __('Sản phẩm') }}
-                        
+
                     </x-nav-link>
                     <x-nav-link :href="route('product.recruitment')" :active="request()->routeIs('product.recruitment')">
                         {{ __('Tuyển dụng') }}
@@ -38,8 +39,9 @@
                     <x-nav-link :href="route('product.introduce')" :active="request()->routeIs('product.introduce')">
                         {{ __('Tài khoản') }}
                     </x-nav-link>
-                    
-                    <div class="bg-white w-max !m-0 py-4 px-4 mx-auto opacity-90 hidden absolute z-40 top-16 show_product">
+
+                    <div
+                        class="bg-white w-max !m-0 py-4 px-4 mx-auto opacity-90 hidden absolute z-40 top-16 show_product">
                         <div class="grid css_effect grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="col-span-1 width_effect">
                                 <a href="#"
@@ -86,14 +88,14 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
-                
+
             </div>
 
             <!-- Settings Dropdown -->
-            @if(Auth::user())
+            @if (Auth::user())
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -156,12 +158,13 @@
         </div> --}}
 
         <!-- Responsive Settings Options -->
-        @if(Auth::user())
+        @if (Auth::user())
             <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                 <div class="px-4">
                     <x-responsive-nav-link :href="route('profile.edit')">
-                        <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>                        
+                        <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}
+                        </div>
+                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                     </x-responsive-nav-link>
                 </div>
 
@@ -181,7 +184,8 @@
                     <x-responsive-nav-link :href="route('product.introduce')">
                         {{ __('Giới thiệu') }}
                     </x-responsive-nav-link>
-                    <a href="#" id="mobile-menu-button" class="!my-2.5 block w-full ps-3 pe-4 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out">
+                    <a href="#" id="mobile-menu-button"
+                        class="!my-2.5 block w-full ps-3 pe-4 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out">
                         {{ __('Sản phẩm') }}
                         <ul class="ml-4 show_product_mobile hidden">
                             @foreach (config('supplies.stone') as $id => $itemStone)
@@ -204,7 +208,7 @@
                             @endforeach
                         </ul>
                     </a>
-                    
+
                     <x-responsive-nav-link :href="route('product.recruitment')">
                         {{ __('Tuyển dụng') }}
                     </x-responsive-nav-link>
@@ -223,10 +227,54 @@
                                             this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
-                        
+
                     </form>
                 </div>
             </div>
         @endif
     </div>
 </nav>
+@include('supplies.form_delete')
+<script>
+    // form delete chung
+    function deleteForm(route,id) {
+        event.preventDefault(); // Prevent default behavior of the click event
+        let formDelete = $("#delete-form");
+        let del = confirm("Are you sure you want to delete this holiday?");
+        if (del) {
+            formDelete.attr("action", `${route}`);
+            formDelete.attr("method", "POST");
+            formDelete.append('<input type="hidden" name="id" value=' + id + '>');
+            formDelete.submit(); // Submit the form
+            console.log("tỉn");
+        }
+    }
+
+    // function deleteForm(route, id) {
+    //     event.preventDefault(); // Prevent default behavior of the click event
+    //     let formDelete = $("#delete-form");
+
+    //     Swal.fire({
+    //         title: 'Are you sure?',
+    //         text: "You won't be able to revert this action!",
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#d33',
+    //         confirmButtonText: 'Yes, delete it!',
+    //         cancelButtonText: 'No, cancel!'
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             formDelete.attr("action", route);
+    //             formDelete.attr("method", "POST");
+    //             formDelete.append('<input type="hidden" name="id" value="' + id + '">');
+    //             formDelete.submit(); // Submit the form
+    //             Swal.fire(
+    //                 'Deleted!',
+    //                 'Your holiday has been deleted.',
+    //                 'success'
+    //             );
+    //         }
+    //     });
+    // }
+</script>
