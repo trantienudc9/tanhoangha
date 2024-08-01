@@ -7,7 +7,7 @@
 
         {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
         <title>Tân Hoàng Hà</title>
-
+        <link rel="icon" href="{{ asset('img/logo.jpg') }}" type="image/jpg">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -29,9 +29,10 @@
             @endif
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <main class="min-h-96 py-4">
+                {{ $slot }}    
             </main>
+            <x-footer />
         </div>
     </body>
 </html>

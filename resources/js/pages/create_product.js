@@ -14,27 +14,51 @@ $('#image').change(function() {
     $('#file-name').text(file.name);
 });
 
+// $(document).ready(function() {
+//     // Lưu cấu hình vào biến toàn cục để truy xuất nhanh hơn
+//     let kindProductId = $("#product_type").val();
+//     const dataConfig = window.dataConfig;
+//     let options = '';
+//     dataConfig.forEach(e => {
+//         if(e.product_type_id == kindProductId){
+//             options += `<option value="${e.id}">${e.name}</option>`;
+//         }
+//     });
+
+//     $("#kind_product_type").html(options);
+//     $("#product_type").on("change", function() {
+//         options = '';
+//         const productType = $(this).val();
+//         dataConfig.forEach(e => {
+//             if(e.product_type_id == productType){
+//                 options += `<option value="${e.id}">${e.name}</option>`;
+//             }
+//         });
+
+//         $("#kind_product_type").html(options);
+//     });
+// });
+
 $(document).ready(function() {
-    // Lưu cấu hình vào biến toàn cục để truy xuất nhanh hơn
     const dataConfig = window.dataConfig;
+    const productTypeSelect = $("#product_type");
+    const kindProductTypeSelect = $("#kind_product_type");
 
-    $("#product_type").on("change", function() {
-        const productType = $(this).val();
-        const data_type = dataConfig[productType] || {};
+    // Hàm tạo tùy chọn cho select
+    function updateOptions(selectedProductType) {
+        let options = dataConfig
+            .filter(e => e.product_type_id == selectedProductType)
+            .map(e => `<option value="${e.id}">${e.name}</option>`)
+            .join('');
 
-        // Tạo các tùy chọn
-        const options = Object.entries(data_type).map(([key, value]) =>
-            `<option value="${key}">${value}</option>`
-        ).join('');
+        kindProductTypeSelect.html(options);
+    }
 
-        // Cập nhật HTML
-        const add_data = options ? `
-    <label for="kind_product_type" class="block text-gray-700 text-sm font-bold mb-2">Sản phẩm:</label>
-    <select id="kind_product_type" name="kind_product_type"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        ${options}
-    </select>` : '';
+    // Khởi tạo khi trang được tải
+    updateOptions(productTypeSelect.val());
 
-        $(".add_kind").html(add_data);
+    // Cập nhật khi thay đổi loại sản phẩm
+    productTypeSelect.on("change", function() {
+        updateOptions($(this).val());
     });
 });

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Services\SuppliesService;
 use App\Http\Requests\SuppliesProductRequest;
 use App\Services\ImageProductsService;
+use App\Models\ProductType;
+use App\Models\KindProductType;
 use Illuminate\Support\Facades\Auth;
 // use Spatie\Permission\Models\Role;
 class SuppliesController extends Controller
@@ -37,8 +39,10 @@ class SuppliesController extends Controller
     public function create_product($id = null)
     {
         $dataSupplies = $this->suppliesService->find($id);
+        $products = ProductType::all();
+        $productKinds = KindProductType::all();
 
-        $data = compact('dataSupplies');
+        $data = compact('dataSupplies','products','productKinds');
 
         return view('supplies.create_product',$data);
     }

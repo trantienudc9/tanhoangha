@@ -11,7 +11,7 @@
         </div>
 
         <div>
-            {{-- @php
+            @php
                 // Tạo một mảng các danh mục sản phẩm với các thông tin cần hiển thị
                 $categories = [
                     [
@@ -74,16 +74,7 @@
                         </div>
                     </div>
                 @endif
-            @endforeach --}}
-
-            <div class="bg-white p-4 rounded-lg shadow-lg">
-                <h1 class="text-4xl font-bold text-teal-500 mb-4 text-center">Tien duc</h1>
-                <div class="lg:px-28 md:px-20">
-                    @foreach ($supplies as $valProduct)
-                        @include('supplies.product_card')
-                    @endforeach
-                    </div>
-                </div>
+            @endforeach
         </div>
     </div>
 </x-app-layout>

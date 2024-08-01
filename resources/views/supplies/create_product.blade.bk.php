@@ -51,10 +51,10 @@
                         class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
                     @error('product_type') border-red-500 @enderror"
                         required>
-                        @foreach ($products as $product)
-                            <option value="{{ $product->id }}"
-                                {{ old('product_type', $dataSupplies->product_type ?? '') == $product->id ? 'selected' : '' }}>
-                                {{ $product->name }}
+                        @foreach (config('supplies.product_type') as $id => $name)
+                            <option value="{{ $id }}"
+                                {{ old('product_type', $dataSupplies->product_type ?? '') == $id ? 'selected' : '' }}>
+                                {{ $name }}
                             </option>
                         @endforeach
                     </select>
@@ -65,11 +65,28 @@
 
                 <!-- Sản Phẩm -->
                 <div class="mb-4 add_kind">
+                    @php
+                        // Xác định kiểu sản phẩm và lấy cấu hình tương ứng
+                        $productType = $dataSupplies->product_type ?? null;
+                        $configKey = match ($productType) {
+                            1 => 'stone',
+                            2 => 'me',
+                            3 => 'metal',
+                            default => null,
+                        };
+                        $configData = $configKey ? config("supplies.$configKey") : config("supplies.stone");
+                    @endphp
+
                     <label for="kind_product_type" class="block text-gray-700 text-sm font-medium mb-2">Sản phẩm:</label>
                     <select id="kind_product_type" name="kind_product_type"
                         class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
                         @error('kind_product_type') border-red-500 @enderror">
-                       
+                        @foreach ($configData as $id => $name)
+                            <option value="{{ $id }}"
+                                {{ old('kind_product_type', $dataSupplies->kind_product_type ?? '') == $id ? 'selected' : '' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
                     </select>
                     @error('kind_product_type')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -143,7 +160,11 @@
         </form>
     </div>
     <script>
-        window.dataConfig = @json($productKinds);
+        window.dataConfig = {
+            1: @json(config('supplies.stone')),
+            2: @json(config('supplies.me')),
+            3: @json(config('supplies.metal'))
+        };
     </script>
 </x-app-layout>
 @vite(['resources/js/pages/create_product.js'])

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuppliesController;
 use App\Http\Controllers\ImageProductController;
+use App\Http\Controllers\ProductTypeAndKindController;
 use App\Http\Middleware\CheckRole;
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,7 @@ Route::get('lien-he', [SuppliesController::class, 'contact_products'])->name('pr
 Route::get('san-pham/{kind_product_type}/{product_type}', [SuppliesController::class, 'items_products'])->name('product.items');
 
 Route::middleware(['role:admin,user'])->group(function () {
-    Route::get('them-san-pham/{id?}', [SuppliesController::class, 'create_product'])->name('product.create')->middleware('role:admin');
+    Route::get('them-san-pham/{id?}', [SuppliesController::class, 'create_product'])->name('product.create');
     Route::post('store-product', [SuppliesController::class, 'store_product'])->name('product.store');
     Route::put('update-product', [SuppliesController::class, 'update_product'])->name('product.update');
     Route::delete('delete-product', [SuppliesController::class, 'delete_product'])->name('product.delete');
@@ -53,6 +54,21 @@ Route::middleware(['role:admin,user'])->group(function () {
     Route::put('update-background', [ImageProductController::class, 'update_background'])->name('image.update_background');
     Route::delete('delete-background', [ImageProductController::class, 'delete_background'])->name('image.delete_background');
 
+    //ProductTypeAndKindController
+
+    // ProductType
+    Route::get('product-types/{id?}', [ProductTypeAndKindController::class, 'indexProductTypes'])->name('product-types.index');
+    Route::post('product-types', [ProductTypeAndKindController::class, 'storeProductType'])->name('product-types.store');
+    Route::put('product-types', [ProductTypeAndKindController::class, 'updateProductType'])->name('product-types.update');
+    Route::delete('product-types', [ProductTypeAndKindController::class, 'destroyProductType'])->name('product-types.destroy');
+
+    //AndKind
+    Route::get('kind-product-types/{id?}', [ProductTypeAndKindController::class, 'indexKindProductTypes'])->name('kind-product-types.index');
+    Route::post('kind-product-types', [ProductTypeAndKindController::class, 'storeKindProductType'])->name('kind-product-types.store');
+    Route::put('kind-product-types', [ProductTypeAndKindController::class, 'updateKindProductType'])->name('kind-product-types.update');
+    Route::delete('kind-product-types', [ProductTypeAndKindController::class, 'destroyKindProductType'])->name('kind-product-types.destroy');
+
 });
+
 
 require __DIR__.'/auth.php';

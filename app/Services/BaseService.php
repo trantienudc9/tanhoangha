@@ -26,6 +26,7 @@ abstract class BaseService
 
     public function create($data)
     {
+        // dd($this);
         return $this->repository->create($data);
     }
 
