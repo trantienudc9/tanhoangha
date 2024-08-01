@@ -39,7 +39,7 @@
                         name="product_type_id">
                         @foreach ($listProduct as $productType)
                             <option value="{{ $productType->id }}"
-                                {{ old('id_kind_background', $productType->id ?? '') == $getFindProduct->product_type_id ? 'selected' : '' }}>
+                                {{ old('id_kind_background', $productType->id ?? '') == ($getFindProduct->product_type_id ?? '') ? 'selected' : '' }}>
                                 {{ $productType->name }}
                             </option>
                         @endforeach
@@ -56,7 +56,7 @@
                     <button type="submit"
                         class="w-full md:w-1/3 py-3 px-6 bg-green-500 from-teal-400 to-teal-600 text-white font-bold rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal-400">{{ isset($getFindProduct) ? 'Cập nhật' : 'Tạo' }}</button>
                     @if(isset($getFindProduct))
-                        <a href="{{ route('kind-product-types.index') }}" 
+                        <a href="{{ route('kind-product-types.index') }}"
                             class="inline-block px-6 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-400">
                             Hủy
                         </a>

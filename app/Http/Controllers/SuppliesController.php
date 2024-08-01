@@ -8,6 +8,7 @@ use App\Http\Requests\SuppliesProductRequest;
 use App\Services\ImageProductsService;
 use App\Models\ProductType;
 use App\Models\KindProductType;
+use App\Services\ProductTypeAndKindService;
 use Illuminate\Support\Facades\Auth;
 // use Spatie\Permission\Models\Role;
 class SuppliesController extends Controller
@@ -15,11 +16,13 @@ class SuppliesController extends Controller
 
     protected $suppliesService;
     protected $imageProductsService;
+    protected $productTypeAndKindService;
 
-    public function __construct(SuppliesService $suppliesService, ImageProductsService $imageProductsService)
+    public function __construct(SuppliesService $suppliesService, ImageProductsService $imageProductsService, ProductTypeAndKindService $productTypeAndKindService)
     {
         $this->suppliesService = $suppliesService;
         $this->imageProductsService = $imageProductsService;
+        $this->productTypeAndKindService = $productTypeAndKindService;
     }
     public function index()
     {
@@ -27,11 +30,15 @@ class SuppliesController extends Controller
         // $user->assignRole('admin');
 
         // $role = Role::create(['name' => 'writer']);
+        $product = 'productype';
+
         $supplies = $this->suppliesService->getProductOutstanding();
 
         $backgrounds = $this->imageProductsService->getbackground(1);
 
-        $data = compact('supplies','backgrounds');
+        $productTypes = $this->productTypeAndKindService->getall($product);
+
+        $data = compact('supplies','backgrounds','productTypes');
 
         return view('supplies.index',$data);
     }

@@ -17,7 +17,7 @@ class ProductTypeAndKindController extends Controller
     }
 
     public function indexProductTypes($id = null){
-        
+
         $product = 'productype';
         $getFindProduct = $this->productTypeAndKindService->getfind($id,$product);
         $productTypes = $this->productTypeAndKindService->getall($product);
@@ -80,7 +80,7 @@ class ProductTypeAndKindController extends Controller
         return redirect()->route('kind-product-types.index')->with('success', 'Cập nhật loại sản phẩm thành công!');
 
     }
-    
+
     public function destroyKindProductType(Request $request){
 
         $product = 'kind';
@@ -89,5 +89,5 @@ class ProductTypeAndKindController extends Controller
         return redirect()->back()->with('success', 'Xóa loại sản phẩm thành công!');
 
     }
-    
+
 }

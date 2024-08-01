@@ -151,12 +151,6 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        {{-- <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div> --}}
-
         <!-- Responsive Settings Options -->
         @if (Auth::user())
             <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -249,32 +243,4 @@
             console.log("tỉn");
         }
     }
-
-    // function deleteForm(route, id) {
-    //     event.preventDefault(); // Prevent default behavior of the click event
-    //     let formDelete = $("#delete-form");
-
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You won't be able to revert this action!",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, delete it!',
-    //         cancelButtonText: 'No, cancel!'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             formDelete.attr("action", route);
-    //             formDelete.attr("method", "POST");
-    //             formDelete.append('<input type="hidden" name="id" value="' + id + '">');
-    //             formDelete.submit(); // Submit the form
-    //             Swal.fire(
-    //                 'Deleted!',
-    //                 'Your holiday has been deleted.',
-    //                 'success'
-    //             );
-    //         }
-    //     });
-    // }
 </script>

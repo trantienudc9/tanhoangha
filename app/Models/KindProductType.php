@@ -20,4 +20,10 @@ class KindProductType extends Model
     {
         return $this->belongsTo(ProductType::class, 'product_type_id');
     }
+
+    public function supplies()
+    {
+        return $this->hasMany(Supplies::class, 'kind_product_type');
+    }
+
 }

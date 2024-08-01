@@ -29,7 +29,8 @@ class ProductTypeAndKindService extends BaseService
 
     public function getall($product){
         if($product == 'productype'){
-            return $this->productType->all();
+            // return $this->productType->all();
+            return $this->productType->getAllProductOtimize();
         }else{
             return $this->kindProductType->getAllProduct();
         }
