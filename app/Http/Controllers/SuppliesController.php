@@ -23,6 +23,7 @@ class SuppliesController extends Controller
         $this->suppliesService = $suppliesService;
         $this->imageProductsService = $imageProductsService;
         $this->productTypeAndKindService = $productTypeAndKindService;
+        view()->share('productTypes', ProductType::with(['kinds.supplies'])->get());
     }
     public function index()
     {
@@ -30,15 +31,12 @@ class SuppliesController extends Controller
         // $user->assignRole('admin');
 
         // $role = Role::create(['name' => 'writer']);
-        $product = 'productype';
 
         $supplies = $this->suppliesService->getProductOutstanding();
 
         $backgrounds = $this->imageProductsService->getbackground(1);
 
-        $productTypes = $this->productTypeAndKindService->getall($product);
-
-        $data = compact('supplies','backgrounds','productTypes');
+        $data = compact('supplies','backgrounds');
 
         return view('supplies.index',$data);
     }

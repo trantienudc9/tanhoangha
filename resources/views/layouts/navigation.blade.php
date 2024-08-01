@@ -43,6 +43,24 @@
                     <div
                         class="bg-white w-max !m-0 py-4 px-4 mx-auto opacity-90 hidden absolute z-40 top-16 show_product">
                         <div class="grid css_effect grid-cols-1 md:grid-cols-3 gap-6">
+                            {{-- @foreach ($productTypes as $productType)
+                                <div class="col-span-1 width_effect">
+                                    <a href="#"
+                                        class="block text-black font-bold text-lg mb-2 transition-transform transform hover:scale-105">{{ $productType->name }}</a>
+                                    <hr class="my-2">
+                                    <ul class="leading-10">
+                                        @foreach ($productType->kinds as $kind)
+                                            @foreach ($kind->supplies as $valProduct)
+                                                <li>
+                                                    <a href="{{ route('product.items', ['kind_product_type' => $valProduct->id, 'product_type' => $valProduct->product_type]) }}"
+                                                        class="text-black">{{ $valProduct->name }}</a>
+                                                    <hr class="effect hidden">
+                                                </li>
+                                            @endforeach
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endforeach --}}
                             <div class="col-span-1 width_effect">
                                 <a href="#"
                                     class="block text-black font-bold text-lg mb-2 transition-transform transform hover:scale-105">SẢN
@@ -231,7 +249,7 @@
 @include('supplies.form_delete')
 <script>
     // form delete chung
-    function deleteForm(route,id) {
+    function deleteForm(route, id) {
         event.preventDefault(); // Prevent default behavior of the click event
         let formDelete = $("#delete-form");
         let del = confirm("Are you sure you want to delete this holiday?");
