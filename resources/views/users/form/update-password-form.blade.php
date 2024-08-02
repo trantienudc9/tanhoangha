@@ -9,16 +9,10 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+    <form method="POST" action="{{ route('admin.users.update-password', $user) }}" class="mt-6 space-y-6">
         @csrf
-        @method('put')
-
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Mật khẩu hiện tại')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
-        </div>
-
+        @method('PUT')
+        
         <div>
             <x-input-label for="update_password_password" :value="__('Mật khẩu mới')" />
             <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
@@ -41,7 +35,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Đã lưu.') }}</p>
             @endif
         </div>
     </form>

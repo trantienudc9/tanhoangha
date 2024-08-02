@@ -38,7 +38,7 @@
                     <input type="text" id="type" name="type"
                         class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
                     @error('type') border-red-500 @enderror"
-                        placeholder="Nhập loại vật liệu" required value="{{ old('type', $dataSupplies->type ?? '') }}">
+                        placeholder="Thương hiệu" required value="{{ old('type', $dataSupplies->type ?? '') }}">
                     @error('type')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -142,8 +142,12 @@
             </div>
         </form>
     </div>
+    @php 
+        $kindProductType = isset($dataSupplies->kind_product_type) ? $dataSupplies->kind_product_type : '';
+    @endphp
     <script>
         window.dataConfig = @json($productKinds);
+        window.kindProductType = @json($kindProductType);
     </script>
 </x-app-layout>
 @vite(['resources/js/pages/create_product.js'])

@@ -1,7 +1,7 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Thông tin cá nhân') }}
+            {{ __('Thông tin') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -13,9 +13,9 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('admin.users.update', $user) }}" class="mt-6 space-y-6">
         @csrf
-        @method('patch')
+        @method('PUT')
 
         <div>
             <x-input-label for="name" :value="__('Tên')" />

@@ -19,4 +19,9 @@ class ProductType extends Model
     {
         return $this->hasMany(KindProductType::class, 'product_type_id');
     }
+
+    public function supplies()
+    {
+        return $this->hasMany(Supplies::class, 'product_type');
+    }
 }

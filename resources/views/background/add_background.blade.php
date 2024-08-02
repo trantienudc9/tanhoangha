@@ -37,10 +37,17 @@
                     <select id="select"
                         class="block w-full md:w-2/3 p-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent text-gray-700"
                         name="id_kind_background">
-                        @foreach ($supplies as $id => $name)
+                        {{-- @foreach ($supplies as $id => $name)
                             <option value="{{ $id }}"
                                 {{ old('id_kind_background', $itemBackground->id_kind_background ?? '') == $id ? 'selected' : '' }}>
                                 {{ $name }}
+                            </option>
+                        @endforeach --}}
+                        <option value="1" {{ old('id_kind_background', $itemBackground->id_kind_background ?? '') == 1 ? 'selected' : '' }}>Trang chủ</option>
+                        @foreach ($productKinds as $productKind)
+                            <option value="{{ $productKind->id }}"
+                                {{ old('id_kind_background', $itemBackground->id_kind_background ?? '') == $productKind->id ? 'selected' : '' }}>
+                                {{ $productKind->name }}
                             </option>
                         @endforeach
                     </select>
@@ -102,7 +109,7 @@
                     @foreach ($backgrounds as $key => $background)
                         <tr class="even:bg-gray-200 odd:bg-gray-50 hover:bg-teal-200 border-t border-gray-200">
                             <td class="py-3 px-4 text-center">{{ $key + 1 }}</td>
-                            <td class="py-3 px-4 text-center">{{ $supplies[$background->id_kind_background] }}</td>
+                            <td class="py-3 px-4 text-center">{{ isset($background->kindProductType->name) ? $background->kindProductType->name : 'Trang chủ' }}</td>
                             <td class="py-3 px-4 text-center">
                                 <a href="#" class="flex justify-center">
                                     <img src="{{ asset($background->URL) }}"

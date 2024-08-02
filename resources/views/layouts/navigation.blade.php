@@ -26,7 +26,7 @@
                     <x-nav-link :href="route('product.introduce')" :active="request()->routeIs('product.introduce')">
                         {{ __('Giới thiệu') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('product.introduce')" :active="request()->routeIs('product.introduce')" class="display_product">
+                    <x-nav-link class="display_product">
                         {{ __('Sản phẩm') }}
 
                     </x-nav-link>
@@ -36,76 +36,32 @@
                     <x-nav-link :href="route('product.contact')" :active="request()->routeIs('product.contact')">
                         {{ __('Liên hệ') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('product.introduce')" :active="request()->routeIs('product.introduce')">
+                    <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
                         {{ __('Tài khoản') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
+                        {{ __('Quyền') }}
                     </x-nav-link>
 
                     <div
                         class="bg-white w-max !m-0 py-4 px-4 mx-auto opacity-90 hidden absolute z-40 top-16 show_product">
                         <div class="grid css_effect grid-cols-1 md:grid-cols-3 gap-6">
-                            {{-- @foreach ($productTypes as $productType)
+                            @foreach ($productTypesAll as $productType)
                                 <div class="col-span-1 width_effect">
                                     <a href="#"
                                         class="block text-black font-bold text-lg mb-2 transition-transform transform hover:scale-105">{{ $productType->name }}</a>
                                     <hr class="my-2">
                                     <ul class="leading-10">
                                         @foreach ($productType->kinds as $kind)
-                                            @foreach ($kind->supplies as $valProduct)
-                                                <li>
-                                                    <a href="{{ route('product.items', ['kind_product_type' => $valProduct->id, 'product_type' => $valProduct->product_type]) }}"
-                                                        class="text-black">{{ $valProduct->name }}</a>
-                                                    <hr class="effect hidden">
-                                                </li>
-                                            @endforeach
+                                            <li>
+                                                <a href="{{ route('product.items', ['kind_product_type' => $kind->id, 'product_type' => $kind->product_type_id]) }}"
+                                                    class="text-black">{{ $kind->name }}</a>
+                                                <hr class="effect hidden">
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
-                            @endforeach --}}
-                            <div class="col-span-1 width_effect">
-                                <a href="#"
-                                    class="block text-black font-bold text-lg mb-2 transition-transform transform hover:scale-105">SẢN
-                                    PHẨM VỀ XÂY DỰNG</a>
-                                <hr class="my-2">
-                                <ul class="leading-10">
-                                    @foreach (config('supplies.stone') as $id => $itemStone)
-                                        <li>
-                                            <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 1]) }}"
-                                                class="text-black">{{ $itemStone }}</a>
-                                            <hr class="effect hidden">
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="col-span-1">
-                                <a href="#"
-                                    class="block font-bold text-black text-lg mb-2 transition-transform transform hover:scale-105">Sản
-                                    phẩm về M&E</a>
-                                <hr class="my-2">
-                                <ul class="leading-10">
-                                    @foreach (config('supplies.me') as $id => $itemMe)
-                                        <li>
-                                            <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}"
-                                                class="text-black">{{ $itemMe }}</a>
-                                            <hr class="effect hidden">
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="col-span-1">
-                                <a href="#"
-                                    class="block font-bold text-lg text-black mb-2 transition-transform transform hover:scale-105">VẬT
-                                    TƯ KIM KHÍ & TIÊU HAO NHÀ MÁY</a>
-                                <hr class="my-2">
-                                <ul class="leading-10">
-                                    @foreach (config('supplies.metal') as $id => $itemMetal)
-                                        <li>
-                                            <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 3]) }}"
-                                                class="text-black">{{ $itemMetal }}</a>
-                                            <hr class="effect hidden">
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -134,7 +90,7 @@
 
                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
+                                {{ __('Thông tin') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
@@ -144,7 +100,7 @@
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Đăng xuất') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -200,22 +156,11 @@
                         class="!my-2.5 block w-full ps-3 pe-4 border-l-4 border-transparent text-start text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out">
                         {{ __('Sản phẩm') }}
                         <ul class="ml-4 show_product_mobile hidden">
-                            @foreach (config('supplies.stone') as $id => $itemStone)
+                            @foreach ($kindProducts as $kind)
                                 <li>
-                                    <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 1]) }}"
-                                        class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">{{ $itemStone }}</a>
-                                </li>
-                            @endforeach
-                            @foreach (config('supplies.me') as $id => $itemMe)
-                                <li>
-                                    <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}"
-                                        class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">{{ $itemMe }}</a>
-                                </li>
-                            @endforeach
-                            @foreach (config('supplies.metal') as $id => $itemMetal)
-                                <li>
-                                    <a href="{{ route('product.items', ['kind_product_type' => $id, 'product_type' => 2]) }}"
-                                        class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">{{ $itemMetal }}</a>
+                                    <a href="{{ route('product.items', ['kind_product_type' => $kind->id, 'product_type' => $kind->product_type_id]) }}"
+                                        class="block py-2 px-4 text-black hover:bg-teal-400 hover:text-white">{{ $kind->name }}</a>
+                                    <hr class="effect hidden">
                                 </li>
                             @endforeach
                         </ul>

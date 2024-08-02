@@ -21,4 +21,5 @@ class KindProductTypeRepository extends BaseRepository
 
         return KindProductType::where('product_type_id',$kindProductId)->delete();
     }
+
 }

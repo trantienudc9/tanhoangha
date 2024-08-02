@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuppliesController;
 use App\Http\Controllers\ImageProductController;
 use App\Http\Controllers\ProductTypeAndKindController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Middleware\CheckRole;
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
 // Khách hàng có thể xem
 Route::get('trang-chu', [SuppliesController::class, 'index'])->name('product.index'); 
-Route::get('chi-tiet/{id?}', [SuppliesController::class, 'detail_product'])->name('product.detail')->middleware('permission:read');
+Route::get('chi-tiet/{id?}', [SuppliesController::class, 'detail_product'])->name('product.detail');
 Route::get('gioi-thieu', [SuppliesController::class, 'introduce_products'])->name('product.introduce');
 Route::get('tuyen-dung', [SuppliesController::class, 'recruitment_products'])->name('product.recruitment');
 Route::get('lien-he', [SuppliesController::class, 'contact_products'])->name('product.contact');
@@ -67,6 +70,23 @@ Route::middleware(['role:admin,user'])->group(function () {
     Route::post('kind-product-types', [ProductTypeAndKindController::class, 'storeKindProductType'])->name('kind-product-types.store');
     Route::put('kind-product-types', [ProductTypeAndKindController::class, 'updateKindProductType'])->name('kind-product-types.update');
     Route::delete('kind-product-types', [ProductTypeAndKindController::class, 'destroyKindProductType'])->name('kind-product-types.destroy');
+
+    // Nguoi dung
+
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::put('/admin/users/{user}/change-password', [UserController::class, 'updatePassword'])->name('admin.users.update-password');
+
+    // Tao tai khoan nguoi dung
+    Route::get('register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
+    // Phan quyen cho tung user
+    Route::get('/admin/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+    Route::post('/admin/permissions/update', [PermissionController::class, 'update'])->name('permissions.update');
 
 });
 

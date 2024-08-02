@@ -14,32 +14,9 @@ $('#image').change(function() {
     $('#file-name').text(file.name);
 });
 
-// $(document).ready(function() {
-//     // Lưu cấu hình vào biến toàn cục để truy xuất nhanh hơn
-//     let kindProductId = $("#product_type").val();
-//     const dataConfig = window.dataConfig;
-//     let options = '';
-//     dataConfig.forEach(e => {
-//         if(e.product_type_id == kindProductId){
-//             options += `<option value="${e.id}">${e.name}</option>`;
-//         }
-//     });
-
-//     $("#kind_product_type").html(options);
-//     $("#product_type").on("change", function() {
-//         options = '';
-//         const productType = $(this).val();
-//         dataConfig.forEach(e => {
-//             if(e.product_type_id == productType){
-//                 options += `<option value="${e.id}">${e.name}</option>`;
-//             }
-//         });
-
-//         $("#kind_product_type").html(options);
-//     });
-// });
-
 $(document).ready(function() {
+    let kindProductType = window.kindProductType;
+    console.log(kindProductType)
     const dataConfig = window.dataConfig;
     const productTypeSelect = $("#product_type");
     const kindProductTypeSelect = $("#kind_product_type");
@@ -48,7 +25,7 @@ $(document).ready(function() {
     function updateOptions(selectedProductType) {
         let options = dataConfig
             .filter(e => e.product_type_id == selectedProductType)
-            .map(e => `<option value="${e.id}">${e.name}</option>`)
+            .map(e => `<option value="${e.id}" ${kindProductType == e.id ? 'selected' : ''}>${e.name}</option>`)
             .join('');
 
         kindProductTypeSelect.html(options);

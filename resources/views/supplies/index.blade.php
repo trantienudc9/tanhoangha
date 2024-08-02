@@ -12,7 +12,7 @@
         </div>
 
         <div>
-            @foreach ($productTypes as $productType)
+            @foreach ($productTypesAll as $productType)
                 <div class="bg-white p-4 rounded-lg shadow-lg">
                     <h1 class="text-4xl font-bold text-teal-500 mb-4 text-center">{{ $productType->name }}</h1>
                     <div class="lg:px-28 md:px-20">

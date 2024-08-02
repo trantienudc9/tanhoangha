@@ -29,7 +29,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class="min-h-96 py-4">
+            <main class="!min-h-[600px] py-4">
                 {{ $slot }}    
             </main>
             <x-footer />

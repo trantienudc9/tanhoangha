@@ -69,7 +69,7 @@
                 <tbody>
                     @foreach ($productTypes as $key => $productType)
                         <tr class="{{ $background == $productType->id ? '!bg-teal-300' : '' }} even:bg-gray-200 odd:bg-gray-50 hover:bg-teal-200 border-t border-gray-200">
-                            <td class="py-3 px-4 text-center">{{ $key + 1 }}</td>
+                            <td class="py-3 px-4 !text-center">{{ $key + 1 }}</td>
                             <td class="py-3 px-4 text-center">{{ $productType->name }}</td>
                             <td class="py-3 px-4 text-center">
                                 <a href="{{ route('product-types.index', ['id' => $productType->id]) }}">
