@@ -44,8 +44,7 @@
                             <li><a href="{{ route('product.introduce') }}" class="hover:text-gray-200 text-lg">Giới thiệu</a></li>
                             <li>
                                 <a href="#"
-                                    class="hover:text-gray-200 display_product relative before:content-[''] hover:before:block before:hidden before:w-20 before:h-8 before:absolute before:top-full before:left-0 text-lg">Sản
-                                    phẩm</a>
+                                    class="hover:text-gray-200 display_product relative before:content-[''] hover:before:block before:hidden before:w-20 before:h-8 before:absolute before:top-full before:left-0 text-lg">Sản phẩm</a>
                                 <div
                                     class="bg-white w-full md:w-7/12 py-4 px-4 mx-auto opacity-90 absolute z-40 left-28 top-16 hidden show_product">
                                     <div class="grid css_effect grid-cols-1 md:grid-cols-3 gap-6">

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Services\ImageProductsService;
 use Illuminate\Http\Request;
 use App\Http\Requests\BackgroundRequest;
-
+use App\Models\KindProductType;
 class ImageProductController extends Controller
 {
     protected $imageProductsService;
@@ -18,8 +18,9 @@ class ImageProductController extends Controller
 
         $backgrounds = $this->imageProductsService->getAll();
         $itemBackground = $this->imageProductsService->find($id);
+        $productKinds = KindProductType::all();
 
-        $data = compact('backgrounds','itemBackground');
+        $data = compact('backgrounds','itemBackground','productKinds');
 
         return view('background.add_background',$data);
     }

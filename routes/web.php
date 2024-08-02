@@ -1,31 +1,94 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuppliesController;
 use App\Http\Controllers\ImageProductController;
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use App\Http\Controllers\ProductTypeAndKindController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Middleware\CheckRole;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-Route::get('/', [SuppliesController::class, 'index'])->name('product.index');
-Route::get('them-san-pham/{id?}', [SuppliesController::class, 'create_product'])->name('product.create');
-Route::post('store-product', [SuppliesController::class, 'store_product'])->name('product.store');
-Route::put('update-product', [SuppliesController::class, 'update_product'])->name('product.update');
-Route::delete('delete-product', [SuppliesController::class, 'delete_product'])->name('product.delete');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+//edit, update, delete account
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Khách hàng có thể xem
+Route::get('trang-chu', [SuppliesController::class, 'index'])->name('product.index'); 
 Route::get('chi-tiet/{id?}', [SuppliesController::class, 'detail_product'])->name('product.detail');
-Route::get('san-pham/{kind_product_type}/{product_type}', [SuppliesController::class, 'items_products'])->name('product.items');
 Route::get('gioi-thieu', [SuppliesController::class, 'introduce_products'])->name('product.introduce');
 Route::get('tuyen-dung', [SuppliesController::class, 'recruitment_products'])->name('product.recruitment');
 Route::get('lien-he', [SuppliesController::class, 'contact_products'])->name('product.contact');
+Route::get('san-pham/{kind_product_type}/{product_type}', [SuppliesController::class, 'items_products'])->name('product.items');
 
-// infor_produc
-Route::get('thong-so-san-pham/{id}', [SuppliesController::class, 'parameters'])->name('product.parameters');
-Route::put('update_parameters', [SuppliesController::class, 'update_parameters'])->name('product.update_parameters');
+Route::middleware(['role:admin,user'])->group(function () {
+    Route::get('them-san-pham/{id?}', [SuppliesController::class, 'create_product'])->name('product.create');
+    Route::post('store-product', [SuppliesController::class, 'store_product'])->name('product.store');
+    Route::put('update-product', [SuppliesController::class, 'update_product'])->name('product.update');
+    Route::delete('delete-product', [SuppliesController::class, 'delete_product'])->name('product.delete');
+    Route::get('thong-so-san-pham/{id}', [SuppliesController::class, 'parameters'])->name('product.parameters');
+    Route::put('update_parameters', [SuppliesController::class, 'update_parameters'])->name('product.update_parameters');
+    // imgae_product
 
-// imgae_product
+    Route::get('them-anh/{id?}', [ImageProductController::class, 'add_background'])->name('image.background');
+    Route::post('store-background', [ImageProductController::class, 'store_background'])->name('image.store_background');
+    Route::put('update-background', [ImageProductController::class, 'update_background'])->name('image.update_background');
+    Route::delete('delete-background', [ImageProductController::class, 'delete_background'])->name('image.delete_background');
 
-Route::get('them-anh/{id?}', [ImageProductController::class, 'add_background'])->name('image.background');
-Route::post('store-background', [ImageProductController::class, 'store_background'])->name('image.store_background');
-Route::put('update-background', [ImageProductController::class, 'update_background'])->name('image.update_background');
-Route::delete('delete-background', [ImageProductController::class, 'delete_background'])->name('image.delete_background');
+    //ProductTypeAndKindController
 
+    // ProductType
+    Route::get('product-types/{id?}', [ProductTypeAndKindController::class, 'indexProductTypes'])->name('product-types.index');
+    Route::post('product-types', [ProductTypeAndKindController::class, 'storeProductType'])->name('product-types.store');
+    Route::put('product-types', [ProductTypeAndKindController::class, 'updateProductType'])->name('product-types.update');
+    Route::delete('product-types', [ProductTypeAndKindController::class, 'destroyProductType'])->name('product-types.destroy');
+
+    //AndKind
+    Route::get('kind-product-types/{id?}', [ProductTypeAndKindController::class, 'indexKindProductTypes'])->name('kind-product-types.index');
+    Route::post('kind-product-types', [ProductTypeAndKindController::class, 'storeKindProductType'])->name('kind-product-types.store');
+    Route::put('kind-product-types', [ProductTypeAndKindController::class, 'updateKindProductType'])->name('kind-product-types.update');
+    Route::delete('kind-product-types', [ProductTypeAndKindController::class, 'destroyKindProductType'])->name('kind-product-types.destroy');
+
+    // Nguoi dung
+
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::put('/admin/users/{user}/change-password', [UserController::class, 'updatePassword'])->name('admin.users.update-password');
+
+    // Tao tai khoan nguoi dung
+    Route::get('register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
+    // Phan quyen cho tung user
+    Route::get('/admin/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+    Route::post('/admin/permissions/update', [PermissionController::class, 'update'])->name('permissions.update');
+
+});
+
+
+require __DIR__.'/auth.php';

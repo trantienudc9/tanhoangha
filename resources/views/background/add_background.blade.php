@@ -1,11 +1,4 @@
-@extends('layout.default')
-
-@section('title')
-    Ảnh nền
-    @parent
-@stop
-
-@section('content')
+<x-app-layout>
 
     <div class="max-w-7xl mx-auto px-6 py-8 bg-white from-blue-100 via-purple-100 to-pink-100 rounded-xl shadow-lg">
         <!-- Hiển thị thông báo lỗi nếu có -->
@@ -44,10 +37,17 @@
                     <select id="select"
                         class="block w-full md:w-2/3 p-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent text-gray-700"
                         name="id_kind_background">
-                        @foreach ($supplies as $id => $name)
+                        {{-- @foreach ($supplies as $id => $name)
                             <option value="{{ $id }}"
                                 {{ old('id_kind_background', $itemBackground->id_kind_background ?? '') == $id ? 'selected' : '' }}>
                                 {{ $name }}
+                            </option>
+                        @endforeach --}}
+                        <option value="1" {{ old('id_kind_background', $itemBackground->id_kind_background ?? '') == 1 ? 'selected' : '' }}>Trang chủ</option>
+                        @foreach ($productKinds as $productKind)
+                            <option value="{{ $productKind->id }}"
+                                {{ old('id_kind_background', $itemBackground->id_kind_background ?? '') == $productKind->id ? 'selected' : '' }}>
+                                {{ $productKind->name }}
                             </option>
                         @endforeach
                     </select>
@@ -109,7 +109,7 @@
                     @foreach ($backgrounds as $key => $background)
                         <tr class="even:bg-gray-200 odd:bg-gray-50 hover:bg-teal-200 border-t border-gray-200">
                             <td class="py-3 px-4 text-center">{{ $key + 1 }}</td>
-                            <td class="py-3 px-4 text-center">{{ $supplies[$background->id_kind_background] }}</td>
+                            <td class="py-3 px-4 text-center">{{ isset($background->kindProductType->name) ? $background->kindProductType->name : 'Trang chủ' }}</td>
                             <td class="py-3 px-4 text-center">
                                 <a href="#" class="flex justify-center">
                                     <img src="{{ asset($background->URL) }}"
@@ -130,102 +130,5 @@
             </table>
         </div>
     </div>
-
-
-@section('script')
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            // Lắng nghe sự kiện click trên nút chọn ảnh
-            $('#chooseImage').on('click', function() {
-                // Kích hoạt input file khi nút chọn ảnh được nhấp
-                $('#fileInput').click();
-            });
-
-            // Lắng nghe sự kiện thay đổi trên input file
-            $('#fileInput').on('change', function(event) {
-                // Lấy tệp được chọn từ input
-                const file = event.target.files[0];
-                const $filePreview = $('#filePreview');
-
-                // Kiểm tra nếu có tệp được chọn
-                if (file) {
-                    const reader = new FileReader();
-
-                    // Đọc nội dung của tệp sau khi nó được chọn
-                    reader.onload = function(e) {
-                        let content;
-                        // Kiểm tra xem tệp có phải là hình ảnh không
-                        if (file.type.startsWith('image/')) {
-                            content =
-                                `<img src="${e.target.result}" class="file-preview rounded-lg shadow-lg max-w-full h-auto" alt="Preview">`;
-                        } else {
-                            content = `
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                  <p class="text-gray-800 font-semibold">File: ${file.name}</p>
-                  <p class="text-gray-600">Type: ${file.type}</p>
-                  <p class="text-gray-600">Size: ${file.size} bytes</p>
-                </div>`;
-                        }
-                        // Hiển thị nội dung của tệp lên giao diện
-                        $filePreview.html(content);
-                    };
-
-                    // Đọc tệp dưới dạng Data URL (dùng cho hình ảnh và tệp khác)
-                    reader.readAsDataURL(file);
-                } else {
-                    // Xóa bản xem trước nếu không có tệp được chọn
-                    $filePreview.empty();
-                }
-            });
-        });
-
-        $(document).ready(function() {
-            // Khởi tạo DataTable cho bảng của bạn
-            $('table').DataTable({
-                "paging": true, // Cho phép phân trang
-                "searching": true, // Cho phép tìm kiếm
-                "info": true, // Hiển thị thông tin bảng (hiển thị số lượng bản ghi)
-                "responsive": true // Tự động điều chỉnh kích thước bảng cho các thiết bị di động
-            });
-
-            // Lắng nghe sự kiện click trên nút chọn ảnh
-            $('#chooseImage').on('click', function() {
-                $('#fileInput').click();
-            });
-
-            $('#fileInput').on('change', function(event) {
-                const file = event.target.files[0];
-                const $filePreview = $('#filePreview');
-
-                if (file) {
-                    const reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        let content;
-                        if (file.type.startsWith('image/')) {
-                            content =
-                                `<img src="${e.target.result}" class="file-preview rounded-lg shadow-lg max-w-full h-auto" alt="Preview">`;
-                        } else {
-                            content = `
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                  <p class="text-gray-800 font-semibold">File: ${file.name}</p>
-                  <p class="text-gray-600">Type: ${file.type}</p>
-                  <p class="text-gray-600">Size: ${file.size} bytes</p>
-                </div>`;
-                        }
-                        $filePreview.html(content);
-                    };
-
-                    reader.readAsDataURL(file);
-                } else {
-                    $filePreview.empty();
-                }
-            });
-        });
-
-    </script>
-
-@stop
-
-@stop
+</x-app-layout>
+@vite(['resources/js/pages/add_background.js'])

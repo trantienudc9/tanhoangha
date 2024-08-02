@@ -6,24 +6,34 @@ use Illuminate\Http\Request;
 use App\Services\SuppliesService;
 use App\Http\Requests\SuppliesProductRequest;
 use App\Services\ImageProductsService;
-
+use App\Models\ProductType;
+use App\Models\KindProductType;
+use App\Services\ProductTypeAndKindService;
+use Illuminate\Support\Facades\Auth;
+// use Spatie\Permission\Models\Role;
 class SuppliesController extends Controller
 {
 
     protected $suppliesService;
     protected $imageProductsService;
+    protected $productTypeAndKindService;
 
-    public function __construct(SuppliesService $suppliesService, ImageProductsService $imageProductsService)
+    public function __construct(SuppliesService $suppliesService, ImageProductsService $imageProductsService, ProductTypeAndKindService $productTypeAndKindService)
     {
         $this->suppliesService = $suppliesService;
         $this->imageProductsService = $imageProductsService;
+        $this->productTypeAndKindService = $productTypeAndKindService;
     }
     public function index()
     {
+        // $user = Auth::user();
+        // $user->assignRole('admin');
+
+        // $role = Role::create(['name' => 'writer']);
 
         $supplies = $this->suppliesService->getProductOutstanding();
 
-        $backgrounds = $this->imageProductsService->getbackground(1);
+        $backgrounds = $this->imageProductsService->backgroundFind(1);
 
         $data = compact('supplies','backgrounds');
 
@@ -33,8 +43,11 @@ class SuppliesController extends Controller
     public function create_product($id = null)
     {
         $dataSupplies = $this->suppliesService->find($id);
+        // dd($dataSupplies->kind_product_type);
+        $products = ProductType::all();
+        $productKinds = KindProductType::all();
 
-        $data = compact('dataSupplies');
+        $data = compact('dataSupplies','products','productKinds');
 
         return view('supplies.create_product',$data);
     }
@@ -74,12 +87,14 @@ class SuppliesController extends Controller
     }
 
     public function items_products($kind_product_type=null,$product_type=null){
-
+        
+        $productKind = KindProductType::find($kind_product_type);
         $typeProducts = $this->suppliesService->getTypeProducts($kind_product_type,$product_type);
         $id_kind_background = $product_type.$kind_product_type;
-        $backgrounds = $this->imageProductsService->getbackground($id_kind_background);
+        $backgrounds = $this->imageProductsService->backgroundFind($kind_product_type);
 
-        $data = compact('typeProducts','kind_product_type','product_type','backgrounds');
+
+        $data = compact('typeProducts','kind_product_type','product_type','backgrounds','productKind');
 
         return view('supplies.items_products',$data);
     }
@@ -93,7 +108,7 @@ class SuppliesController extends Controller
 
     public function introduce_products(){
 
-        $backgrounds = $this->imageProductsService->getbackground(1);
+        $backgrounds = $this->imageProductsService->backgroundFind(1);
 
         $data = compact('backgrounds');
         return view('supplies.introduce',$data);
@@ -101,14 +116,14 @@ class SuppliesController extends Controller
 
     public function recruitment_products(){
 
-        $backgrounds = $this->imageProductsService->getbackground(1);
+        $backgrounds = $this->imageProductsService->backgroundFind(1);
 
         $data = compact('backgrounds');
         return view('supplies.recruitment',$data);
     }
 
     public function contact_products(){
-        $backgrounds = $this->imageProductsService->getbackground(1);
+        $backgrounds = $this->imageProductsService->backgroundFind(1);
 
         $data = compact('backgrounds');
         return view('supplies.contact',$data);

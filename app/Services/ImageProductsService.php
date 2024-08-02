@@ -30,14 +30,14 @@ class ImageProductsService extends BaseService
         }
     }
 
-    public function getbackground($id_kind_background){
-
-        return $this->repository->backgrounds($id_kind_background);
-    }
-
     public function getAll(){
 
-        return $this->repository->oderByAll();
+        return $this->repository->getBgKinds();
+    }
+
+    public function backgroundFind($kind_product_type){
+        
+        return $this->repository->getAllImage($kind_product_type);
     }
 
 }

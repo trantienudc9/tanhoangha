@@ -1,14 +1,16 @@
-@extends('layout.default')
-@section('title')
-    Thêm sản phẩm
-    @parent
-
-@stop
-
-@section('content')
+<x-app-layout>
     @php $isEdit = isset($dataSupplies) ? true : false; @endphp
-    <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 space-y-6">
-        <h1 class="text-2xl font-bold text-gray-900">{{ $isEdit ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm' }}</h1>
+    <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 space-y-6 my-16">
+        <div class="flex gap-4">
+            <h1 class="text-2xl font-bold text-gray-900">{{ $isEdit ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm' }}</h1>
+            <a href="{{ route('product-types.index') }}" title="Thêm loại sản phẩm" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+            <a href="{{ route('kind-product-types.index') }}" title="Thêm sản phẩm" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                <i class="fa-solid fa-cart-plus"></i>
+            </a>
+              
+        </div>
         <form action="{{ $isEdit ? route('product.update') : route('product.store') }}" method="POST"
             enctype="multipart/form-data" class="space-y-4">
             @csrf
@@ -36,7 +38,7 @@
                     <input type="text" id="type" name="type"
                         class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
                     @error('type') border-red-500 @enderror"
-                        placeholder="Nhập loại vật liệu" required value="{{ old('type', $dataSupplies->type ?? '') }}">
+                        placeholder="Thương hiệu" required value="{{ old('type', $dataSupplies->type ?? '') }}">
                     @error('type')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -49,10 +51,10 @@
                         class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
                     @error('product_type') border-red-500 @enderror"
                         required>
-                        @foreach (config('supplies.product_type') as $id => $name)
-                            <option value="{{ $id }}"
-                                {{ old('product_type', $dataSupplies->product_type ?? '') == $id ? 'selected' : '' }}>
-                                {{ $name }}
+                        @foreach ($products as $product)
+                            <option value="{{ $product->id }}"
+                                {{ old('product_type', $dataSupplies->product_type ?? '') == $product->id ? 'selected' : '' }}>
+                                {{ $product->name }}
                             </option>
                         @endforeach
                     </select>
@@ -63,28 +65,11 @@
 
                 <!-- Sản Phẩm -->
                 <div class="mb-4 add_kind">
-                    @php
-                        // Xác định kiểu sản phẩm và lấy cấu hình tương ứng
-                        $productType = $dataSupplies->product_type ?? null;
-                        $configKey = match ($productType) {
-                            1 => 'stone',
-                            2 => 'me',
-                            3 => 'metal',
-                            default => null,
-                        };
-                        $configData = $configKey ? config("supplies.$configKey") : config("supplies.stone");
-                    @endphp
-
                     <label for="kind_product_type" class="block text-gray-700 text-sm font-medium mb-2">Sản phẩm:</label>
                     <select id="kind_product_type" name="kind_product_type"
                         class="shadow-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500
                         @error('kind_product_type') border-red-500 @enderror">
-                        @foreach ($configData as $id => $name)
-                            <option value="{{ $id }}"
-                                {{ old('kind_product_type', $dataSupplies->kind_product_type ?? '') == $id ? 'selected' : '' }}>
-                                {{ $name }}
-                            </option>
-                        @endforeach
+                       
                     </select>
                     @error('kind_product_type')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -157,60 +142,12 @@
             </div>
         </form>
     </div>
-
-
-
-
-@section('script')
-    {{-- <script src="../js/create_products.js"></script> --}}
-    <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
-    <script type="text/javascript">
-        $('#image').change(function() {
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#image-preview').empty(); // Clear previous preview
-                var imgElement = $('<img>').attr({
-                    src: e.target.result,
-                    class: 'rounded-lg shadow-md',
-                    style: 'max-width: 100%;'
-                });
-                $('#image-preview').append(imgElement);
-            };
-            reader.readAsDataURL(file);
-            $('#file-name').text(file.name);
-        });
-
-        $(document).ready(function() {
-            // Lưu cấu hình vào biến toàn cục để truy xuất nhanh hơn
-            const dataConfig = {
-                1: @json(config('supplies.stone')),
-                2: @json(config('supplies.me')),
-                3: @json(config('supplies.metal'))
-            };
-
-            $("#product_type").on("change", function() {
-                const productType = $(this).val();
-                const data_type = dataConfig[productType] || {};
-
-                // Tạo các tùy chọn
-                const options = Object.entries(data_type).map(([key, value]) =>
-                    `<option value="${key}">${value}</option>`
-                ).join('');
-
-                // Cập nhật HTML
-                const add_data = options ? `
-            <label for="kind_product_type" class="block text-gray-700 text-sm font-bold mb-2">Sản phẩm:</label>
-            <select id="kind_product_type" name="kind_product_type"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                ${options}
-            </select>` : '';
-
-                $(".add_kind").html(add_data);
-            });
-        });
-
+    @php 
+        $kindProductType = isset($dataSupplies->kind_product_type) ? $dataSupplies->kind_product_type : '';
+    @endphp
+    <script>
+        window.dataConfig = @json($productKinds);
+        window.kindProductType = @json($kindProductType);
     </script>
-@stop
-
-@stop
+</x-app-layout>
+@vite(['resources/js/pages/create_product.js'])

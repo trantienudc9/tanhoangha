@@ -1,11 +1,4 @@
-@extends('layout.default')
-
-@section('title')
-    Liên hệ
-    @parent
-@stop
-
-@section('content')
+<x-app-layout>
     <div class="relative">
         <!-- Carousel Background Images -->
         <div class="multiple-items">
@@ -52,9 +45,5 @@
             </div>
         </div>
     </div>
-@endsection
 
-@section('script')
-    <!-- Thêm các tài nguyên JavaScript của bạn tại đây -->
-    <script type="text/javascript"></script>
-@stop
+</x-app-layout>
