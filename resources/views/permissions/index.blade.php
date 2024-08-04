@@ -1,13 +1,13 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-6">
         <h1 class="text-2xl font-semibold mb-4">Quản lý Quyền Người Dùng</h1>
-    
-        @if(session('success'))
+
+        {{-- @if(session('success'))
             <div class="bg-green-500 text-white p-4 mb-4 rounded">
                 {{ session('success') }}
             </div>
         @endif
-    
+     --}}
         <form action="{{ route('permissions.update') }}" method="POST">
             @csrf
             <div class="overflow-x-auto">
@@ -42,7 +42,7 @@
                     </tbody>
                 </table>
             </div>
-    
+
             <div class="mt-6">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Cập nhật Quyền</button>
             </div>

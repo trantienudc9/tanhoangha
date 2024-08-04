@@ -43,7 +43,6 @@ class SuppliesController extends Controller
     public function create_product($id = null)
     {
         $dataSupplies = $this->suppliesService->find($id);
-        // dd($dataSupplies->kind_product_type);
         $products = ProductType::all();
         $productKinds = KindProductType::all();
 
@@ -56,21 +55,21 @@ class SuppliesController extends Controller
     {
         $this->suppliesService->storeProduct($request);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Bạn đã tạo thành công!');
     }
 
     public function update_product(SuppliesProductRequest $request){
 
         $this->suppliesService->updateProduct($request);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Cập nhật thành công!');
     }
 
     public function delete_product(Request $request){
 
         $this->suppliesService->delete($request->id);
 
-        return redirect()->back();
+        return redirect()->back()->with('delete', 'Bạn đã xóa thành công');
     }
 
     protected function renderProductView($viewName, $id = null) {
@@ -87,7 +86,7 @@ class SuppliesController extends Controller
     }
 
     public function items_products($kind_product_type=null,$product_type=null){
-        
+
         $productKind = KindProductType::find($kind_product_type);
         $typeProducts = $this->suppliesService->getTypeProducts($kind_product_type,$product_type);
         $id_kind_background = $product_type.$kind_product_type;
