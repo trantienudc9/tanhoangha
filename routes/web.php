@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Khách hàng có thể xem
-Route::get('trang-chu', [SuppliesController::class, 'index'])->name('product.index'); 
+Route::get('/', [SuppliesController::class, 'index'])->name('product.index');
 Route::get('chi-tiet/{id?}', [SuppliesController::class, 'detail_product'])->name('product.detail');
 Route::get('gioi-thieu', [SuppliesController::class, 'introduce_products'])->name('product.introduce');
 Route::get('tuyen-dung', [SuppliesController::class, 'recruitment_products'])->name('product.recruitment');

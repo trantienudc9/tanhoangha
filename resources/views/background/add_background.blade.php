@@ -13,13 +13,6 @@
             </div>
         @endif
 
-        <!-- Hiển thị thông báo thành công nếu có -->
-        @if (session('success'))
-            <div class="mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-                <strong class="font-bold">Thành công!</strong>
-                <p>{{ session('success') }}</p>
-            </div>
-        @endif
         @php
             $supplies = config('supplies.list_background');
             $edit = isset($itemBackground) ? route('image.update_background') : route('image.store_background');

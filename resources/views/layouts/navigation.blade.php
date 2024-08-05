@@ -191,6 +191,26 @@
         @endif
     </div>
 </nav>
+<!-- Hiển thị thông báo thành công nếu có -->
+{{-- @if (session('success'))
+        <div id="notification_success" class=" w-5/6 m-auto mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+            <strong class="font-bold">Thành công!</strong>
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif --}}
+@php
+    $notificationType = session('success') ? 'success' : (session('delete') ? 'delete' : null);
+    $message = session('success') ?? session('delete');
+@endphp
+
+@if ($notificationType)
+    <div id="notification"
+        class="w-5/6 m-auto mt-4 px-4 py-3 rounded relative {{ $notificationType === 'success' ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700' }}">
+        <strong class="font-bold">{{ $notificationType === 'success' ? 'Thành công!' : 'Thành công!' }}</strong>
+        <p>{{ $message }}</p>
+    </div>
+@endif
+
 @include('supplies.form_delete')
 <script>
     // form delete chung
@@ -206,4 +226,20 @@
             console.log("tỉn");
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var notification = document.getElementById('notification');
+
+        if (notification) {
+            setTimeout(function() {
+                notification.style.transition = 'opacity 1s ease-out';
+                notification.style.opacity = '0';
+
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 1000); // Thời gian của hiệu ứng chuyển tiếp (1 giây)
+            }, 2000); // 2000 milliseconds = 2 seconds
+        }
+    });
+
 </script>
