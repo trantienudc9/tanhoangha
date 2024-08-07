@@ -13,13 +13,6 @@
             </div>
         @endif
 
-        <!-- Hiển thị thông báo thành công nếu có -->
-        @if (session('success'))
-            <div class="mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-                <strong class="font-bold">Thành công!</strong>
-                <p>{{ session('success') }}</p>
-            </div>
-        @endif
         @php
             $edit = isset($getFindProduct) ? route('product-types.update') : route('product-types.store');
             $background = isset($getFindProduct) ? $getFindProduct->id : '';
@@ -42,11 +35,11 @@
                     <button type="submit"
                         class="w-full md:w-1/3 py-3 px-6 bg-green-500 from-teal-400 to-teal-600 text-white font-bold rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal-400">{{ isset($getFindProduct) ? 'Cập nhật' : 'Tạo' }}</button>
                     @if(isset($getFindProduct))
-                        <a href="{{ route('product-types.index') }}" 
+                        <a href="{{ route('product-types.index') }}"
                             class="inline-block px-6 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-400">
                             Hủy
                         </a>
-                 
+
                     @endif
                     <a href="{{ route('product.create') }}" title="Thêm sản phẩm" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                         Quay lại
