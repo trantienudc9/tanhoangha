@@ -5,34 +5,43 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
+        // Tạo người dùng
         $users = [
             [
-                'name' => 'John Doe',
-                'email' => 'johndoe@example.com',
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
                 'password' => Hash::make('password'),
+                'role' => 'admin',
             ],
             [
                 'name' => 'Jane Smith',
-                'email' => 'janesmith@example.com',
+                'email' => 'user@example.com',
                 'password' => Hash::make('password'),
+                'role' => 'user',
             ],
             [
                 'name' => 'Bob Johnson',
-                'email' => 'bobjohnson@example.com',
+                'email' => 'hung@example.com',
                 'password' => Hash::make('password'),
+                'role' => 'user',
             ],
         ];
 
         foreach ($users as $user) {
-            User::create($user);
+            $createdUser = User::create([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'password' => $user['password'],
+            ]);
+
+            // Gán role cho người dùng
+            $createdUser->assignRole($user['role']);
         }
     }
 }
