@@ -10,7 +10,7 @@ export default defineConfig({
                 'resources/js/pages/product_form.js',
                 'resources/js/pages/add_background.js',
                 'resources/js/pages/create_product.js',
-                'resources/js/pages/user.js',
+                'resources/js/pages/users.js',
                 'resources/js/pages/items_products.js',
                 'resources/js/pages/parameters.js',
                 'resources/js/pages/product_types.js',
