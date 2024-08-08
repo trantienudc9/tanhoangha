@@ -36,6 +36,8 @@
             text-align: center;
             width: 90%;
             animation: fadeIn 1s ease-out;
+            opacity: 85%;
+            margin-top: 200px;
         }
 
         .invitation-header {
@@ -167,7 +169,7 @@
             }
         }
         .invitation-wrapper{
-            background-image: url({{ asset('img/totnghiep')}});
+            background-image: url({{ asset('img/totnghiep2.jpg')}});
             background-size: cover; /* Tùy chọn để hình ảnh phủ đầy phần tử */
             background-position: center; /* Tùy chọn để hình ảnh căn giữa phần tử */
             background-repeat: no-repeat; /* Tùy chọn để không lặp lại hình ảnh */
