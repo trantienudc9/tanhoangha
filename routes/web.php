@@ -19,6 +19,7 @@ use App\Http\Middleware\CheckRole;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('tot-nghiep-tran-tien-duc', [SuppliesController::class, 'graduate'])->name('graduate.index');
 
 Route::get('/', function () {
     return view('welcome');

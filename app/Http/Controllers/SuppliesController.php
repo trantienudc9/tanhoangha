@@ -127,4 +127,9 @@ class SuppliesController extends Controller
         $data = compact('backgrounds');
         return view('supplies.contact',$data);
     }
+
+    public function graduate(){
+
+        return view('supplies.graduate.index');
+    }
 }
