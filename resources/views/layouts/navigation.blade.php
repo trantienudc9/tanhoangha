@@ -17,12 +17,14 @@
                     <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
                         {{ __('Trang chủ') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('product.create')" :active="request()->routeIs('product.create')">
-                        {{ __('Thêm sản phẩm') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('image.background')" :active="request()->routeIs('image.background')">
-                        {{ __('Ảnh nền') }}
-                    </x-nav-link>
+                    @if (Auth::user())
+                        <x-nav-link :href="route('product.create')" :active="request()->routeIs('product.create')">
+                            {{ __('Thêm sản phẩm') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('image.background')" :active="request()->routeIs('image.background')">
+                            {{ __('Ảnh nền') }}
+                        </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('product.introduce')" :active="request()->routeIs('product.introduce')">
                         {{ __('Giới thiệu') }}
                     </x-nav-link>
@@ -36,12 +38,14 @@
                     <x-nav-link :href="route('product.contact')" :active="request()->routeIs('product.contact')">
                         {{ __('Liên hệ') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
-                        {{ __('Tài khoản') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
-                        {{ __('Quyền') }}
-                    </x-nav-link>
+                    @if (Auth::user())
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                            {{ __('Tài khoản') }}
+                        </x-nav-link>
+                        {{-- <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
+                            {{ __('Quyền') }}
+                        </x-nav-link> --}}
+                    @endif
 
                     <div
                         class="bg-white w-max !m-0 py-4 px-4 mx-auto opacity-90 hidden absolute z-40 top-16 show_product">

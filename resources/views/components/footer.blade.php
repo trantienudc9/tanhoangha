@@ -6,21 +6,19 @@
                 <!-- Column 1: Logo and Contact Info -->
                 <div class="col-span-1 md:col-span-1">
                     <h3 class="text-lg font-semibold mb-4">Liên hệ</h3>
-                    <p class="mb-2"><i class="fa-solid fa-map-marker-alt mr-2 text-blue-500"></i>123 Đường ABC,
-                        Quận XYZ, TP. HCM</p>
+                    <p class="mb-2"><i class="fa-solid fa-map-marker-alt mr-2 text-blue-500"></i>Số 1,Ngõ 45, Phố Đại Từ, P.Đại Kim, Q.Hoàng Mai, TP Hà Nội</p>
                     <p class="mb-2"><i class="fa-solid fa-phone-alt mr-2 text-blue-500"></i><a
-                            href="tel:+123456789">(+84) 123 456 789</a></p>
+                            href="tel:+123456789">0948581080</a></p>
                     <p class="mb-2"><i class="fa-solid fa-envelope mr-2 text-blue-500"></i><a
-                            href="mailto:info@example.com">info@example.com</a></p>
+                            href="mailto:info@example.com">tanhoangha2015@gmail.com</a></p>
                 </div>
                 <!-- Column 2: Quick Links -->
                 <div class="col-span-1 md:col-span-1">
                     <h3 class="text-lg font-semibold mb-4">Liên kết nhanh</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-blue-500">Giới thiệu</a></li>
-                        <li><a href="#" class="hover:text-blue-500">Sản phẩm</a></li>
-                        <li><a href="#" class="hover:text-blue-500">Dịch vụ</a></li>
-                        <li><a href="#" class="hover:text-blue-500">Bài viết</a></li>
+                        <li><a href="{{ route('product.introduce') }}" class="hover:text-blue-500">Giới thiệu</a></li>
+                        <li><a href="{{ route('product.recruitment') }}" class="hover:text-blue-500">Tuyển dụng</a></li>
+                        <li><a href="{{ route('product.contact') }}" class="hover:text-blue-500">Liên hệ</a></li>
                     </ul>
                 </div>
                 <!-- Column 3: Social Links -->

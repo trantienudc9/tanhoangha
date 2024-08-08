@@ -85,8 +85,8 @@ Route::middleware(['role:admin,user'])->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     // Phan quyen cho tung user
-    Route::get('/admin/permissions', [PermissionController::class, 'index'])->name('permissions.index');
-    Route::post('/admin/permissions/update', [PermissionController::class, 'update'])->name('permissions.update');
+    // Route::get('/admin/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+    // Route::post('/admin/permissions/update', [PermissionController::class, 'update'])->name('permissions.update');
 
 });
 
