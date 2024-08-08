@@ -33,13 +33,13 @@
                 <div class="mt-4 mb-4 text-center absolute right-2 top-0">
                     <input type="text" id="search-input" class="px-4 py-2 border border-gray-300 rounded-md" placeholder="Tìm kiếm sản phẩm...">
                 </div>
-                <div class="px-4 sm:px-8 md:px-12 lg:px-20">
+                <div class="px-4 sm:px-8 md:px-12 lg:px-8">
                     <!-- Content Section -->
                     <div id="content" class="">
                         <div id="outstanding" class="content-item">
                             <!-- Sản phẩm nổi bật -->
                             <h3 class="text-3xl font-medium text-teal-500 mb-4">Sản phẩm nổi bật</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 @foreach ($typeProducts as $valProduct)
                                     @if ($valProduct->status == 2)
                                         @include('supplies.product_card')
@@ -50,7 +50,7 @@
                         <div id="news" class="content-item" style="display: none;">
                             <!-- Sản phẩm mới -->
                             <h3 class="text-3xl font-medium text-teal-500 mb-4">Sản phẩm mới</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 @foreach ($typeProducts as $valProduct)
                                     @if ($valProduct->status == 3)
                                         @include('supplies.product_card')
@@ -61,7 +61,7 @@
                         <div id="common" class="content-item" style="display: none;">
                             <!-- Tất cả -->
                             <h3 class="text-3xl font-medium text-teal-500 mb-4 check_find">Tất cả</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 display_item_find">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 display_item_find">
                                 @foreach ($typeProducts as $valProduct)
                                     @include('supplies.product_card')
                                 @endforeach

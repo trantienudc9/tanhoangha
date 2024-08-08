@@ -8,7 +8,7 @@
             </div>
         </a>
         <div class="flex justify-end items-center px-4 sm:px-8 py-4">
-            @can('update')
+            @can('edit')
                 <a href="{{ route('product.create', ['id' => $valProduct->id]) }}" class="text-yellow-400 hover:text-yellow-500">
                     <i class="fa-solid fa-pen-to-square text-xl mr-2"></i>
                 </a>
