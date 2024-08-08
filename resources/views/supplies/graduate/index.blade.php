@@ -27,7 +27,7 @@
         }
 
         .invitation-card {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: #ADD8E6;
             border-radius: 15px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
             padding: 30px;
@@ -122,16 +122,16 @@
     <div class="invitation-wrapper">
         <div class="invitation-card">
             <div class="invitation-header">
-                <img src="https://via.placeholder.com/150x50?text=University+Logo" alt="University Logo" class="logo">
+                <img src="{{asset('img/Uneti-2.png')}}" alt="University Logo" class="logo">
                 <h1>Lời Mời Dự Lễ Tốt Nghiệp</h1>
             </div>
             <div class="invitation-content">
-                <p>Kính gửi: Quý vị</p>
-                <p>Chúng tôi xin trân trọng thông báo và mời quý vị tham dự lễ tốt nghiệp của:</p>
+                <p>Kính gửi : Bố mẹ, thầy cô, anh em, người thân, bạn bè</p>
+                <p>Em xin trân trọng thông báo và mời bố mẹ, thầy cô, anh em, người thân, bạn bè tham dự lễ tốt nghiệp của:</p>
                 <h2>Trần Tiến Đức</h2>
                 <p>Ngày tốt nghiệp: <strong>Ngày 17 tháng 8 năm 2024</strong></p>
                 <p>Thời gian: <strong>08:00 AM</strong></p>
-                <p>Địa điểm: <strong>Trường Đại học XYZ, Hội trường A</strong></p>
+                <p>Địa điểm: <strong>Trường Đại học Kinh Tế Kỹ Thuật Công Nghiệp, Hội trường Tầng 2 HA10 </strong></p>
                 <div id="countdown" style="color: red"></div>
                 <div class="map">
 
@@ -145,10 +145,10 @@
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                 </div>
-                <div class="invitation-footer">
+                {{-- <div class="invitation-footer">
                     <button id="rsvpButton">Xác Nhận Tham Dự</button>
                     <p id="rsvpMessage" class="hidden">Cảm ơn bạn đã xác nhận tham dự!</p>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
