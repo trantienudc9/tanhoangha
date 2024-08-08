@@ -27,9 +27,9 @@
                                 class="rounded-full bg-blue-500 text-white p-2 hover:bg-blue-600 transition duration-200">
                                 <i class="fa-solid fa-phone-volume"></i>
                             </button>
-                            <a href="tel:0337444552" class="text-blue-500">0337444552</a>
+                            <a href="tel:0337444552" class="text-blue-500">0948581080</a>
                         </div>
-                        <div class="flex items-center space-x-2">
+                        {{-- <div class="flex items-center space-x-2">
                             <button
                                 class="rounded-full bg-blue-500 text-white p-2 hover:bg-blue-600 transition duration-200">
                                 <i class="fa-brands fa-facebook"></i>
@@ -42,7 +42,7 @@
                                 <i class="fa-solid fa-z"></i>
                             </button>
                             <a href="#" class="text-blue-500">Vật liệu xây dựng</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
