@@ -24,6 +24,7 @@
             align-items: center;
             width: 100%;
             padding: 20px;
+            box-sizing: border-box;
         }
 
         .invitation-card {
@@ -110,6 +111,61 @@
                 transform: translateY(0);
             }
         }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .invitation-card {
+                padding: 20px;
+                width: 100%;
+            }
+
+            .logo {
+                width: 120px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            #countdown {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .invitation-card {
+                padding: 15px;
+                width: 100%;
+            }
+
+            .logo {
+                width: 100px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 12px;
+            }
+
+            #countdown {
+                font-size: 16px;
+            }
+        }
         .invitation-wrapper{
             background-image: url({{ asset('img/totnghiep')}});
             background-size: cover; /* Tùy chọn để hình ảnh phủ đầy phần tử */
@@ -126,64 +182,47 @@
                 <h1>Lời Mời Dự Lễ Tốt Nghiệp</h1>
             </div>
             <div class="invitation-content">
-                <p>Kính gửi : Bố mẹ, thầy cô, anh em, người thân, bạn bè</p>
-                <p>Em xin trân trọng thông báo và mời bố mẹ, thầy cô, anh em, người thân, bạn bè tham dự lễ tốt nghiệp của:</p>
+                <p>Kính gửi : Bố mẹ, thầy cô, anh em, người thân, bạn bè.</p>
+                <p>Em xin trân trọng mời bố mẹ, thầy cô, anh em, người thân, bạn bè tham dự lễ tốt nghiệp của:</p>
                 <h2>Trần Tiến Đức</h2>
                 <p>Ngày tốt nghiệp: <strong>Ngày 17 tháng 8 năm 2024</strong></p>
                 <p>Thời gian: <strong>08:00 AM</strong></p>
                 <p>Địa điểm: <strong>Trường Đại học Kinh Tế Kỹ Thuật Công Nghiệp, Hội trường Tầng 2 HA10 </strong></p>
                 <div id="countdown" style="color: red"></div>
                 <div class="map">
-
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.306189115338!2d105.87323077601894!3d20.980359989437773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135afd765487289%3A0x21bd5839ba683d5f!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBLaW5oIFThur8gS-G7uSBUaHXhuq10IEPDtG5nIE5naGnhu4dw!5e0!3m2!1svi!2s!4v1723095781677!5m2!1svi!2s"
-                    width="100%"
-                    height="300"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.306189115338!2d105.87323077601894!3d20.980359989437773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135afd765487289%3A0x21bd5839ba683d5f!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBLaW5oIFThur8gS-G7uSBUaHXhuq10IEPDtG5nIE5naGnhu4dw!5e0!3m2!1svi!2s!4v1723095781677!5m2!1svi!2s"
+                        width="100%"
+                        height="300"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                {{-- <div class="invitation-footer">
-                    <button id="rsvpButton">Xác Nhận Tham Dự</button>
-                    <p id="rsvpMessage" class="hidden">Cảm ơn bạn đã xác nhận tham dự!</p>
-                </div> --}}
             </div>
         </div>
     </div>
     <script>
         function updateCountdown() {
-            // Current date and time in UTC
             const now = new Date();
-
-            // Set the target date to 8:00 AM on August 17, 2024 in Vietnam time
             const targetDate = new Date('August 17, 2024 08:00:00 GMT+0700');
-
-            // Time difference between now and the target date
             const distance = targetDate - now;
 
-            // Calculate days, hours, minutes, and seconds
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Display the result
             document.getElementById('countdown').innerHTML =
                 `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây còn lại đến ngày tốt nghiệp.`;
 
-            // If the countdown is over, display a message
             if (distance < 0) {
                 clearInterval(timer);
                 document.getElementById('countdown').innerHTML = 'Ngày tốt nghiệp đã đến!';
             }
         }
 
-        // Update the countdown every 1 second
         const timer = setInterval(updateCountdown, 1000);
-
-        // Initialize the countdown immediately
         updateCountdown();
     </script>
 </body>
