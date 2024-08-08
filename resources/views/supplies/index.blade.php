@@ -10,7 +10,6 @@
                 @endforeach
             </div>
         </div>
-        <a href="{{route('graduate.index')}}">tot nghiep</a>
         <div>
             @foreach ($productTypesAll as $productType)
                 <div class="bg-white p-4 rounded-lg shadow-lg">
